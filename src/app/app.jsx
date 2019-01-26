@@ -8,6 +8,7 @@ import SplashPage from '../components/SplashPage'
 import initialData from '../initialData';
 import Nav from './nav';
 
+// allows me to pass props through the routes
 const renderMergedProps = (component, ...rest) => {
   const finalProps = Object.assign({}, ...rest);
   return (
@@ -15,6 +16,7 @@ const renderMergedProps = (component, ...rest) => {
   );
 };
 
+// Returns a route with renderMergedProps
 const CustomRoute = ({component, authed, ...rest}) => {
   return (
     <Route
