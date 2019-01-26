@@ -4,7 +4,8 @@ export default class ProjectRow extends React.Component {
   render() {
     return (
       <div className='ProjectList'>
-        <h1>ProjectRow</h1>
+        <h1>{this.props.project.name}</h1>
+        <h3>{this.props.project.description}</h3>
       </div>
     );
   }

@@ -5,6 +5,7 @@ export default class TaskRow extends React.Component {
     return (
       <div className='TaskRow'>
         <h1>TaskRow</h1>
+        {this.props.task.name}
       </div>
     );
   }

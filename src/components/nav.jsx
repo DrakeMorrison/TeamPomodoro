@@ -24,8 +24,8 @@ export default class Nav extends React.Component {
               <li><Link to='/timer'>Pomodoro Timer</Link></li>
               <li><Link to='/records'>Records List</Link></li>
             </ul>
-
           </div>
+
         </div>
       </nav>
       );

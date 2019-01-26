@@ -5,6 +5,25 @@ import ProjectList from '../components/ProjectList/ProjectList';
 import PomodoroTimer from '../components/PomodoroTimer/PomodoroTimer';
 import RecordsList from '../components/RecordsList/RecordsList';
 import SplashPage from '../components/SplashPage'
+import initialData from '../initialData';
+
+const renderMergedProps = (component, ...rest) => {
+  const finalProps = Object.assign({}, ...rest);
+  return (
+    React.createElement(component, finalProps)
+  );
+};
+
+const CustomRoute = ({component, authed, ...rest}) => {
+  return (
+    <Route
+      {...rest}
+      render={props =>
+        renderMergedProps(component, props, rest)
+      }
+    />
+  );
+};
 
 export default class App extends React.Component {
   render() {
@@ -16,21 +35,25 @@ export default class App extends React.Component {
               exact path='/'
               component={SplashPage}
             />
-            <Route
+            <CustomRoute
               path='/projectlist'
               component={ProjectList}
+              initialData={initialData}
             />
-            <Route
+            <CustomRoute
               path='/overview'
               component={Overview}
+              initialData={initialData}
             />
-            <Route
+            <CustomRoute
               path='/timer'
               component={PomodoroTimer}
+              initialData={initialData}
             />
-            <Route
+            <CustomRoute
               path='/records'
               component={RecordsList}
+              initialData={initialData}
             />
           </Switch>
         </BrowserRouter>

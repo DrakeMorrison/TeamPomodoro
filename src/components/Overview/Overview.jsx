@@ -10,8 +10,8 @@ export default class Overview extends React.Component {
         <Nav />
         <h1>ProjectOverview</h1>
 
-        <ActiveInventoryColumn />
-        <TodayColumnList />
+        <ActiveInventoryColumn tasks={this.props.initialData.tasks}/>
+        <TodayColumnList data={this.props.initialData}/>
 
       </div>
     );
