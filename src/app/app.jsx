@@ -6,6 +6,7 @@ import PomodoroTimer from '../components/PomodoroTimer/PomodoroTimer';
 import RecordsList from '../components/RecordsList/RecordsList';
 import SplashPage from '../components/SplashPage'
 import initialData from '../initialData';
+import Nav from './nav';
 
 const renderMergedProps = (component, ...rest) => {
   const finalProps = Object.assign({}, ...rest);
@@ -30,7 +31,10 @@ export default class App extends React.Component {
     return (
       <div className='App'>
         <BrowserRouter>
-          <Switch>
+          <div>
+            <Nav />
+            <div className='container-fluid'>
+              <Switch>
             <Route
               exact path='/'
               component={SplashPage}
@@ -56,6 +60,8 @@ export default class App extends React.Component {
               initialData={initialData}
             />
           </Switch>
+            </div>
+          </div>
         </BrowserRouter>
       </div>
     );

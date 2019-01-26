@@ -8,7 +8,9 @@ export default class TodayColumn extends React.Component {
       if (task.userId === this.props.user.id) {
         return <TaskRow key={task.id} task={task} />
       }
+      return null;
   });
+
     return (
       <div className='TodayColumn'>
         <h1>TodayColumn: {this.props.user.name}</h1>

@@ -1,5 +1,4 @@
 import React from 'react';
-import Nav from '../nav';
 import ProjectRow from './ProjectRow/ProjectRow';
 
 export default class ProjectList extends React.Component {
@@ -13,7 +12,6 @@ export default class ProjectList extends React.Component {
 
     return (
       <div className='ProjectList'>
-        <Nav />
         <h1>ProjectList</h1>
         {listOfProjects}
       </div>
