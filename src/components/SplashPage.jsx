@@ -1,5 +1,5 @@
 import React from 'react';
-import Nav from '../components/nav';
+import Nav from './nav';
 
 export default class SplashPage extends React.Component {
   render() {

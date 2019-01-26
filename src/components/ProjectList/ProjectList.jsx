@@ -1,5 +1,6 @@
 import React from 'react';
 import Nav from '../nav';
+import ProjectRow from './ProjectRow/ProjectRow';
 
 export default class ProjectList extends React.Component {
   render() {
@@ -7,6 +8,7 @@ export default class ProjectList extends React.Component {
       <div className='ProjectList'>
         <Nav />
         <h1>ProjectList</h1>
+        <ProjectRow />
       </div>
     );
   }
