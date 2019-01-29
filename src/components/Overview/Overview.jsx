@@ -43,7 +43,7 @@ export default class Overview extends React.Component {
         <DragDropContext onDragEnd={this.onDragEnd}>
 
           <ActiveInventoryColumn tasks={this.props.initialData.tasks}/>
-          <TodayColumnList data={this.props.initialData}/>
+          {/* <TodayColumnList data={this.props.initialData}/> */}
 
         </DragDropContext>
 
