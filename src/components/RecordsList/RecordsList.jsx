@@ -10,7 +10,7 @@ export default class RecordsList extends React.Component {
 
     return (
       <div className='RecordsList'>
-        <h1>RecordsList</h1>
+        <h2>RecordsList</h2>
         {listOfRecords}
       </div>
     );

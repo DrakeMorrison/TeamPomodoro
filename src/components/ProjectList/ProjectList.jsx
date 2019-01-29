@@ -11,7 +11,7 @@ export default class ProjectList extends React.Component {
     });
 
     return (
-      <div className='ProjectList'>
+      <div className='ProjectList col-sm-12'>
         <h1>ProjectList</h1>
         {listOfProjects}
       </div>

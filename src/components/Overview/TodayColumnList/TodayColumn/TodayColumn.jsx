@@ -12,7 +12,7 @@ export default class TodayColumn extends React.Component {
   });
 
     return (
-      <div className='TodayColumn'>
+      <div className='TodayColumn bg-success col-sm-6 col-md-4 col-lg-3'>
         <h1>TodayColumn: {this.props.user.name}</h1>
         {listOfTasksByUser}
       </div>

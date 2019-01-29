@@ -47,12 +47,12 @@ export default class App extends React.Component {
               initialData={initialData}
             />
             <CustomRoute
-              path='/overview'
+              path='/overview/:id'
               component={Overview}
               initialData={initialData}
             />
             <CustomRoute
-              path='/timer'
+              path='/timer/:id'
               component={PomodoroTimer}
               initialData={initialData}
             />

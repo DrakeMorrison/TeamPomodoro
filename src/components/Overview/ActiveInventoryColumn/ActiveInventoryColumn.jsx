@@ -9,8 +9,8 @@ export default class ActiveInventoryColumn extends React.Component {
     });
 
     return (
-      <div className='ActiveInventoryColumn'>
-        <h1>ActiveInventoryColumn</h1>
+      <div className='ActiveInventoryColumn bg-danger col-sm-6 col-md-4 col-lg-3'>
+        <h2>ActiveInventory</h2>
         {listOfTasks}
       </div>
     );

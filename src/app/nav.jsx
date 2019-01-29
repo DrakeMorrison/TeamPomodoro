@@ -20,8 +20,6 @@ export default class Nav extends React.Component {
           <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul className="nav navbar-nav">
               <li><Link to='/projectlist'>Project List</Link></li>
-              <li><Link to='/overview'>Project Overview</Link></li>
-              <li><Link to='/timer'>Pomodoro Timer</Link></li>
               <li><Link to='/records'>Records List</Link></li>
             </ul>
           </div>

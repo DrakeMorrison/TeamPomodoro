@@ -10,7 +10,6 @@ export default class TodayColumnList extends React.Component {
 
     return (
       <div className='TodayColumnList'>
-        <h1>TodayColumnList</h1>
         {listOfUsers}
       </div>
     );
