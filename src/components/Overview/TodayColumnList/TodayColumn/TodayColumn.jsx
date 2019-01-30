@@ -5,17 +5,30 @@ import { Droppable } from 'react-beautiful-dnd';
 export default class TodayColumn extends React.Component {
   render() {
 
-    const listOfTasksByUser = this.props.tasks.map((task, index) => {
-      if (task.userId === this.props.user.id) {
-        return <TaskRow key={task.id} task={task} index={index} />
-      }
-      return null;
-  });
+    // listStyle function
+    const getListStyle = isDraggingOver => ({
+      background: isDraggingOver ? 'lightblue' : 'lightgrey',
+      padding: '8px',
+      width: 250,
+    });
 
     return (
-      <Droppable className='TodayColumn bg-success col-sm-6 col-md-4 col-lg-3'>
-        <h1>{this.props.user.name}'s Today List</h1>
-        {listOfTasksByUser}
+      <Droppable droppableId={this.props.droppableId}>
+        {(provided, snapshot) => (
+            <div
+              ref={provided.innerRef}
+              style={getListStyle(snapshot.isDraggingOver)}
+            >
+              <h3>Today Column</h3>
+
+              {this.props.tasks.map((item, index) => (
+
+                <TaskRow key={item.id} task={item} index={index}/>
+
+              ))}
+              {provided.placeholder}
+            </div>
+        )}
       </Droppable>
     );
   }

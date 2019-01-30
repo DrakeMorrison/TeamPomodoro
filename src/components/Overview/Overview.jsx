@@ -53,23 +53,24 @@ export default class Overview extends Component {
    */
 
    // TODO: update this
-   id2List = {
-     inventory: 'inventory'
-   }
-  // id2List = this.buildId2ListObject();
+  //  id2List = {
+  //    inventory: 'inventory'
+  //  }
 
-  // buildId2ListObject = () => {
-  //   // idDroppableContainer: nameSourceArray
-  //   const id2List = {
-  //     inventory: 'Inventory',
-  //   }
+  id2List = this.buildId2ListObject();
 
-  //   this.state.forEach(list => {
-  //     id2List[] = list;
-  //   });
+  buildId2ListObject = () => {
+    // idDroppableContainer: nameSourceArray
+    const id2List = {
+      inventory: 'inventory',
+    }
 
-  //   return id2List;
-  // }
+    this.state.forEach(list => {
+      id2List[list] = list;
+    });
+
+    return id2List;
+  }
 
   getList = id => this.state[this.id2List[id]];
 
@@ -114,7 +115,9 @@ export default class Overview extends Component {
 
   render() {
 
+// TODO: make this work
     const listOfTodayColumns = Object.keys(this.state).forEach(list => {
+      console.error('list', list);
       return <TodayColumn droppableId={list} tasks={this.state[list]} />
     });
 
