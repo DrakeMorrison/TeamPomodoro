@@ -37,31 +37,31 @@ export default class App extends React.Component {
             <Nav />
             <div className='container-fluid'>
               <Switch>
-            <Route
-              exact path='/'
-              component={SplashPage}
-            />
-            <CustomRoute
-              path='/projectlist'
-              component={ProjectList}
-              initialData={initialData}
-            />
-            <CustomRoute
-              path='/overview/:id'
-              component={Overview}
-              initialData={initialData}
-            />
-            <CustomRoute
-              path='/timer/:id'
-              component={PomodoroTimer}
-              initialData={initialData}
-            />
-            <CustomRoute
-              path='/records'
-              component={RecordsList}
-              initialData={initialData}
-            />
-          </Switch>
+                <Route
+                  exact path='/'
+                  component={SplashPage}
+                />
+                <CustomRoute
+                  path='/projectlist'
+                  component={ProjectList}
+                  initialData={initialData}
+                />
+                <CustomRoute
+                  path='/overview/:id'
+                  component={Overview}
+                  initialData={initialData}
+                />
+                <CustomRoute
+                  path='/timer/:id'
+                  component={PomodoroTimer}
+                  initialData={initialData}
+                />
+                <CustomRoute
+                  path='/records'
+                  component={RecordsList}
+                  initialData={initialData}
+                />
+              </Switch>
             </div>
           </div>
         </BrowserRouter>

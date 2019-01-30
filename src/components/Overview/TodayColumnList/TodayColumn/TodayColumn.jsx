@@ -5,9 +5,9 @@ import { Droppable } from 'react-beautiful-dnd';
 export default class TodayColumn extends React.Component {
   render() {
 
-    const listOfTasksByUser = this.props.data.tasks.map(task => {
+    const listOfTasksByUser = this.props.tasks.map((task, index) => {
       if (task.userId === this.props.user.id) {
-        return <TaskRow key={task.id} task={task} />
+        return <TaskRow key={task.id} task={task} index={index} />
       }
       return null;
   });

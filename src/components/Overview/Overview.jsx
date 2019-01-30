@@ -1,13 +1,7 @@
 import React, { Component } from 'react';
 import { DragDropContext } from 'react-beautiful-dnd';
 import ActiveInventoryColumn from './ActiveInventoryColumn/ActiveInventoryColumn';
-
-// fake data generator
-const getItems = (count, offset = 0) =>
-    Array.from({ length: count }, (v, k) => k).map(k => ({
-        id: `item-${k + offset}`,
-        content: `item ${k + offset}`
-    }));
+import TodayColumn from './TodayColumnList/TodayColumn/TodayColumn';
 
 // a little function to help us with reordering the result
 const reorder = (list, startIndex, endIndex) => {
@@ -18,9 +12,7 @@ const reorder = (list, startIndex, endIndex) => {
     return result;
 };
 
-/**
- * Moves an item from one list to another list.
- */
+// Moves an item from one list to another list.
 const move = (source, destination, droppableSource, droppableDestination) => {
     const sourceClone = Array.from(source);
     const destClone = Array.from(destination);
@@ -36,97 +28,106 @@ const move = (source, destination, droppableSource, droppableDestination) => {
 };
 
 export default class Overview extends Component {
-    state = {
-        items: getItems(10),
-        selected: getItems(5, 10)
+
+  // building a new state object
+  buildStateObject = () => {
+    // new state object
+    const newState = {
+      inventory: this.props.initialData.tasks
     };
 
-    /**
-     * A semi-generic way to handle multiple lists. Matches
-     * the IDs of the droppable container to the names of the
-     * source arrays stored in the state.
-     */
-    id2List = {
-        droppable: 'items',
-        droppable2: 'selected'
-    };
+    this.props.initialData.users.forEach(user => {
+      newState[user.name] = [];
+    });
 
-    getList = id => this.state[this.id2List[id]];
+    return newState;
+  }
 
-    onDragEnd = result => {
-        const { source, destination } = result;
+  // state here because of hoisting
+  state = this.buildStateObject();
 
-        // dropped outside the list
-        if (!destination) {
-            return;
-        }
+  /**
+   * A semi-generic way to handle multiple lists. Matches
+   * the IDs of the droppable container to the names of the
+   * source arrays stored in the state.
+   */
 
-        if (source.droppableId === destination.droppableId) {
-            const items = reorder(
-                this.getList(source.droppableId),
-                source.index,
-                destination.index
-            );
+   // TODO: update this
+   id2List = {
+     inventory: 'inventory'
+   }
+  // id2List = this.buildId2ListObject();
 
-            let state = { items };
+  // buildId2ListObject = () => {
+  //   // idDroppableContainer: nameSourceArray
+  //   const id2List = {
+  //     inventory: 'Inventory',
+  //   }
 
-            if (source.droppableId === 'droppable2') {
-                state = { selected: items };
-            }
+  //   this.state.forEach(list => {
+  //     id2List[] = list;
+  //   });
 
-            this.setState(state);
-        } else {
-            const result = move(
-                this.getList(source.droppableId),
-                this.getList(destination.droppableId),
-                source,
-                destination
-            );
+  //   return id2List;
+  // }
 
-            this.setState({
-                items: result.droppable,
-                selected: result.droppable2
-            });
-        }
-    };
+  getList = id => this.state[this.id2List[id]];
 
-    // Normally you would want to split things out into separate components.
-    // But in this example everything is just done in one place for simplicity
-    render() {
-        return (
-          <div className='Overview'>
-            <DragDropContext onDragEnd={this.onDragEnd}>
-                <ActiveInventoryColumn />
-                {/* <Droppable droppableId="droppable2">
-                    {(provided, snapshot) => (
-                        <div
-                            ref={provided.innerRef}
-                            style={getListStyle(snapshot.isDraggingOver)}>
-                            {this.state.selected.map((item, index) => (
-                                <Draggable
-                                    key={item.id}
-                                    draggableId={item.id}
-                                    index={index}>
-                                    {(provided, snapshot) => (
-                                        <div
-                                            ref={provided.innerRef}
-                                            {...provided.draggableProps}
-                                            {...provided.dragHandleProps}
-                                            style={getItemStyle(
-                                                snapshot.isDragging,
-                                                provided.draggableProps.style
-                                            )}>
-                                            {item.content}
-                                        </div>
-                                    )}
-                                </Draggable>
-                            ))}
-                            {provided.placeholder}
-                        </div>
-                    )}
-                </Droppable> */}
-            </DragDropContext>
-          </div>
-        );
-    }
+  // TODO: figure this out and change to accomodate dynamic number of lists
+  onDragEnd = result => {
+      const { source, destination } = result;
+
+      // dropped outside the list
+      if (!destination) {
+          return;
+      }
+
+      // dropped on the same list it came from
+      if (source.droppableId === destination.droppableId) {
+          const items = reorder(
+              this.getList(source.droppableId),
+              source.index,
+              destination.index
+          );
+
+          let state = { items };
+
+          if (source.droppableId === 'droppable2') {
+              state = { selected: items };
+          }
+
+          this.setState(state);
+      } else {
+          const result = move(
+              this.getList(source.droppableId),
+              this.getList(destination.droppableId),
+              source,
+              destination
+          );
+
+          this.setState({
+              items: result.droppable,
+              selected: result.droppable2
+          });
+      }
+  };
+
+  render() {
+
+    const listOfTodayColumns = Object.keys(this.state).forEach(list => {
+      return <TodayColumn droppableId={list} tasks={this.state[list]} />
+    });
+
+      return (
+        <div className='Overview'>
+          <DragDropContext onDragEnd={this.onDragEnd}>
+
+              <ActiveInventoryColumn tasks={this.state.inventory}/>
+
+              {listOfTodayColumns}
+
+          </DragDropContext>
+        </div>
+      );
+  }
 }
