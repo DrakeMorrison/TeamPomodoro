@@ -2,14 +2,11 @@ body {
   padding-top: 50px;
 }
 
-.ActiveInventoryColumn, .TodayColumn {
-  /* height: 56rem; */
-  height: 100%;
-
-}
+/* .ActiveInventoryColumn, .TodayColumn {
+  height: 56rem;
+} */
 
 .Overview {
   display: flex;
-  flex-flow: row nowrap;
   justify-content: space-evenly;
 }

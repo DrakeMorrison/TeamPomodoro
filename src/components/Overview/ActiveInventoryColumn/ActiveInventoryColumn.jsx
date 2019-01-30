@@ -1,18 +1,35 @@
 import React from 'react';
 import TaskRow from '../TaskRow/TaskRow';
+import { Droppable } from 'react-beautiful-dnd';
 
 export default class ActiveInventoryColumn extends React.Component {
   render() {
 
-    const listOfTasks = this.props.tasks.map(task => {
-        return <TaskRow key={task.id} task={task} />
+    // listStyle function
+    const getListStyle = isDraggingOver => ({
+      background: isDraggingOver ? 'lightblue' : 'lightgrey',
+      padding: '8px',
+      width: 250,
     });
 
     return (
-      <div className='ActiveInventoryColumn bg-danger col-sm-6 col-md-4 col-lg-3'>
-        <h2>ActiveInventory</h2>
-        {listOfTasks}
-      </div>
+      <Droppable droppableId="inventory">
+        {(provided, snapshot) => (
+            <div
+              ref={provided.innerRef}
+              style={getListStyle(snapshot.isDraggingOver)}
+            >
+              <h3>Active Inventory</h3>
+
+              {this.props.tasks.map((item, index) => (
+
+                <TaskRow key={item.id} task={item} index={index}/>
+
+              ))}
+              {provided.placeholder}
+            </div>
+        )}
+      </Droppable>
     );
   }
 }
