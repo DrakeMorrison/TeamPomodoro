@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { DragDropContext } from 'react-beautiful-dnd';
-import TodayColumn from './TodayColumnList/TodayColumn/TodayColumn';
+import TodayColumn from './TodayColumn/TodayColumn';
 
 // a little function to help us with reordering the result
 const reorder = (list, startIndex, endIndex) => {

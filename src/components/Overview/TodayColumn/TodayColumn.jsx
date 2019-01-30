@@ -1,8 +1,8 @@
 import React from 'react';
-import TaskRow from '../TaskRow/TaskRow';
+import TaskRow from './TaskRow/TaskRow';
 import { Droppable } from 'react-beautiful-dnd';
 
-export default class ActiveInventoryColumn extends React.Component {
+export default class TodayColumn extends React.Component {
   render() {
 
     // listStyle function
@@ -13,13 +13,13 @@ export default class ActiveInventoryColumn extends React.Component {
     });
 
     return (
-      <Droppable droppableId="inventory">
+      <Droppable droppableId={this.props.droppableId}>
         {(provided, snapshot) => (
             <div
               ref={provided.innerRef}
               style={getListStyle(snapshot.isDraggingOver)}
             >
-              <h3>Active Inventory</h3>
+              <h3>{this.props.droppableId}</h3>
 
               {this.props.tasks.map((item, index) => (
 
