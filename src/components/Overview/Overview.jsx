@@ -51,26 +51,20 @@ export default class Overview extends Component {
    * the IDs of the droppable container to the names of the
    * source arrays stored in the state.
    */
-
-   // TODO: update this
-  //  id2List = {
-  //    inventory: 'inventory'
-  //  }
-
-  id2List = this.buildId2ListObject();
-
   buildId2ListObject = () => {
     // idDroppableContainer: nameSourceArray
     const id2List = {
       inventory: 'inventory',
     }
 
-    this.state.forEach(list => {
+    Object.keys(this.state).forEach(list => {
       id2List[list] = list;
     });
 
     return id2List;
   }
+
+  id2List = this.buildId2ListObject();
 
   getList = id => this.state[this.id2List[id]];
 
@@ -115,10 +109,8 @@ export default class Overview extends Component {
 
   render() {
 
-// TODO: make this work
-    const listOfTodayColumns = Object.keys(this.state).forEach(list => {
-      console.error('list', list);
-      return <TodayColumn droppableId={list} tasks={this.state[list]} />
+    const listOfTodayColumns = Object.keys(this.state).map(list => {
+      return <TodayColumn key={list} droppableId={list} tasks={this.state[list]} />
     });
 
       return (
