@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 export default class Nav extends React.Component {
   render() {
@@ -14,13 +14,13 @@ export default class Nav extends React.Component {
               <span className="icon-bar"></span>
               <span className="icon-bar"></span>
             </button>
-            <Link className='navbar-brand' to='/'>Pomodoro Projects</Link>
+            <NavLink className='navbar-brand' to='/'>Pomodoro Projects</NavLink>
           </div>
 
           <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul className="nav navbar-nav">
-              <li><Link to='/projectlist'>Project List</Link></li>
-              <li><Link to='/records'>Records List</Link></li>
+              <li><NavLink to='/projectlist'>Project List</NavLink></li>
+              <li><NavLink to='/records'>Records List</NavLink></li>
             </ul>
           </div>
 

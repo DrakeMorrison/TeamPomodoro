@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { DragDropContext } from 'react-beautiful-dnd';
-import ActiveInventoryColumn from './ActiveInventoryColumn/ActiveInventoryColumn';
 import TodayColumn from './TodayColumnList/TodayColumn/TodayColumn';
 
 // a little function to help us with reordering the result
@@ -53,9 +52,11 @@ export default class Overview extends Component {
    */
   buildId2ListObject = () => {
     // idDroppableContainer: nameSourceArray
-    const id2List = {
-      inventory: 'inventory',
-    }
+    // const id2List = {
+    //   inventory: 'inventory',
+    // }
+
+    const id2List = {};
 
     Object.keys(this.state).forEach(list => {
       id2List[list] = list;
@@ -109,7 +110,7 @@ export default class Overview extends Component {
 
   render() {
 
-    const listOfTodayColumns = Object.keys(this.state).map(list => {
+    const listOfColumns = Object.keys(this.state).map(list => {
       return <TodayColumn key={list} droppableId={list} tasks={this.state[list]} />
     });
 
@@ -117,9 +118,7 @@ export default class Overview extends Component {
         <div className='Overview'>
           <DragDropContext onDragEnd={this.onDragEnd}>
 
-              <ActiveInventoryColumn tasks={this.state.inventory}/>
-
-              {listOfTodayColumns}
+              {listOfColumns}
 
           </DragDropContext>
         </div>

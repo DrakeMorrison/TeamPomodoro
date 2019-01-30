@@ -19,7 +19,7 @@ export default class TodayColumn extends React.Component {
               ref={provided.innerRef}
               style={getListStyle(snapshot.isDraggingOver)}
             >
-              <h3>Today Column</h3>
+              <h3>{this.props.droppableId}</h3>
 
               {this.props.tasks.map((item, index) => (
 
