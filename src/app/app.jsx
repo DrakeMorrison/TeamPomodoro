@@ -1,5 +1,6 @@
 import React from 'react';
 import { Route, BrowserRouter, Switch }  from 'react-router-dom';
+
 import Overview from '../components/Overview/Overview';
 import ProjectList from '../components/ProjectList/ProjectList';
 import PomodoroTimer from '../components/PomodoroTimer/PomodoroTimer';
@@ -30,11 +31,53 @@ const CustomRoute = ({component, authed, ...rest}) => {
 
 export default class App extends React.Component {
   state = {
-    initialData: {}
+    users: [],
+    projects: [],
+    usersToProjects: [],
+    tasks: [],
+    records: []
   }
 
   componentDidMount() {
     // TODO: get initialData
+
+    this.setState({
+      users: initialData.users,
+      projects: initialData.projects,
+      usersToProjects: initialData.usersToProjects,
+      tasks: initialData.tasks,
+      records: initialData.records
+    });
+  }
+
+  // project state handlers
+  archiveProject = (projectId) => {
+    const newProjects = this.state.projects;
+
+    // find index of project
+    const projectToArchiveIndex = newProjects.findIndex(project => project.id === projectId);
+
+    // set to true
+    newProjects[projectToArchiveIndex].isArchived = true;
+
+    this.setState({ projects: newProjects });
+  }
+
+  restoreProject = (projectId) => {
+    const newProjects = this.state.projects;
+
+    // find index of project
+    const projectToArchiveIndex = newProjects.findIndex(project => project.id === projectId);
+
+    // set to false
+    newProjects[projectToArchiveIndex].isArchived = false;
+
+    this.setState({ projects: newProjects });
+  }
+
+  projectMethods = {
+    archiveProject: this.archiveProject,
+    restoreProject: this.restoreProject
   }
 
   render() {
@@ -52,22 +95,23 @@ export default class App extends React.Component {
                 <CustomRoute
                   path='/projectlist'
                   component={ProjectList}
-                  initialData={initialData}
+                  initialData={this.state}
+                  projectMethods={this.projectMethods}
                 />
                 <CustomRoute
                   path='/overview/:id'
                   component={Overview}
-                  initialData={initialData}
+                  initialData={this.state}
                 />
                 <CustomRoute
                   path='/timer/:id'
                   component={PomodoroTimer}
-                  initialData={initialData}
+                  initialData={this.state}
                 />
                 <CustomRoute
                   path='/records'
                   component={RecordsList}
-                  initialData={initialData}
+                  initialData={this.state}
                 />
               </Switch>
             </div>

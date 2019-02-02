@@ -17,17 +17,18 @@ export default class ProjectList extends React.Component {
     });
 
     const unarchivedProjects = projects.unarchived.map(project => {
-      return <ProjectRow key={project.id} project={project} />;
+      return <ProjectRow key={project.id} project={project} isDisabled={false} projectMethods={this.props.projectMethods} />;
     });
 
     const archivedProjects = projects.archived.map(project => {
-      return <ProjectRow key={project.id} project={project} />;
+      return <ProjectRow key={project.id} project={project} isDisabled={true} projectMethods={this.props.projectMethods} />;
     })
 
     return (
       <div className='ProjectList col-sm-12'>
         <h2>Project List</h2>
         {unarchivedProjects}
+
         <h2>Archived Projects</h2>
         {archivedProjects}
       </div>
