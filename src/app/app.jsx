@@ -29,6 +29,14 @@ const CustomRoute = ({component, authed, ...rest}) => {
 };
 
 export default class App extends React.Component {
+  state = {
+    initialData: {}
+  }
+
+  componentDidMount() {
+    // TODO: get initialData
+  }
+
   render() {
     return (
       <div className='App'>

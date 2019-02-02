@@ -32,8 +32,25 @@ export default class Overview extends Component {
   buildStateObject = () => {
     // new state object
     const newState = {
-      inventory: this.props.initialData.tasks
+      Inventory: this.props.initialData.tasks
     };
+
+    // const usersForProject = () => {
+    //   const users2ProjectArray = [];
+
+    //   this.props.initialData.usersToProjects.forEach(user2Project => {
+    //     if (user2Project.projectId*1 === this.props.match.params.id*1) {
+    //       users2ProjectArray.push(user2Project);
+    //     }
+    //   });
+
+    //   const usersArray = this.props.initialData.users.filter(user => {
+    //     return users2ProjectArray.find(user2Project => user2Project.projectId*1 === user.projectId*1);
+    //   });
+
+    //   return usersArray;
+    // }
+
 
     this.props.initialData.users.forEach(user => {
       newState[user.name] = [];
@@ -51,11 +68,6 @@ export default class Overview extends Component {
    * source arrays stored in the state.
    */
   buildId2ListObject = () => {
-    // idDroppableContainer: nameSourceArray
-    // const id2List = {
-    //   inventory: 'inventory',
-    // }
-
     const id2List = {};
 
     Object.keys(this.state).forEach(list => {
@@ -69,7 +81,7 @@ export default class Overview extends Component {
 
   getList = id => this.state[this.id2List[id]];
 
-  // TODO: figure this out and change to accomodate dynamic number of lists
+  // fires when drag ends on item
   onDragEnd = result => {
       const { source, destination } = result;
 
