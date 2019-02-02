@@ -86,14 +86,12 @@ export default class Overview extends Component {
               destination.index
           );
 
-          let state = { items };
+          // set state of the column
+          const newState = {};
+          newState[source.droppableId] = items;
 
-          if (source.droppableId === 'droppable2') {
-              state = { selected: items };
-          }
-
-          this.setState(state);
-      } else {
+          this.setState(newState);
+      } else { // dropped on a different list
           const result = move(
               this.getList(source.droppableId),
               this.getList(destination.droppableId),
@@ -101,10 +99,16 @@ export default class Overview extends Component {
               destination
           );
 
-          this.setState({
-              items: result.droppable,
-              selected: result.droppable2
-          });
+            // find source and destination list names
+          const sourceListName = source.droppableId;
+          const destinationListName = destination.droppableId;
+
+          // new state
+          const newState = {};
+          newState[sourceListName] = result[sourceListName];
+          newState[destinationListName] = result[destinationListName];
+
+          this.setState(newState);
       }
   };
 
