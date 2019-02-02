@@ -136,14 +136,14 @@ export default class Overview extends Component {
       return <TodayColumn key={list} droppableId={list} tasks={this.state[list]} />
     });
 
-      return (
-        <div className='Overview'>
-          <DragDropContext onDragEnd={this.onDragEnd}>
+    return (
+      <div className='Overview'>
+        <DragDropContext onDragEnd={this.onDragEnd}>
 
-              {listOfColumns}
+            {listOfColumns}
 
-          </DragDropContext>
-        </div>
-      );
+        </DragDropContext>
+      </div>
+    );
   }
 }

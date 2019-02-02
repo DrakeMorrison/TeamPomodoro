@@ -59,7 +59,7 @@ const initialData = {
     {
       id: 2,
       name: 'Bangazon',
-      isArchived: false,
+      isArchived: true,
       description: 'Bangazon project during NSS',
     },
     {
