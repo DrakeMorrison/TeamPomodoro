@@ -30,29 +30,35 @@ export default class Overview extends Component {
 
   // building a new state object
   buildStateObject = () => {
+
+    // get tasks for project
+    const tasksForProject = this.props.initialData.tasks.filter(task => {
+      return task.projectId*1 === this.props.match.params.id*1;
+    });
+
+    // get usersToProjects for this project
+    const userProjects = this.props.initialData.usersToProjects.filter(u2p => {
+      return u2p.projectId*1 === this.props.match.params.id*1;
+    });
+
+    // get users for this project; using the userProjects
+    const usersForProject = this.props.initialData.users.filter(user => {
+      let check = false;
+
+      userProjects.forEach(u2p => {
+        if (user.id*1 === u2p.userId*1) {
+          check = true;
+        }
+      });
+      return check;
+    });
+
     // new state object
     const newState = {
-      Inventory: this.props.initialData.tasks
+      Inventory: tasksForProject
     };
 
-    // const usersForProject = () => {
-    //   const users2ProjectArray = [];
-
-    //   this.props.initialData.usersToProjects.forEach(user2Project => {
-    //     if (user2Project.projectId*1 === this.props.match.params.id*1) {
-    //       users2ProjectArray.push(user2Project);
-    //     }
-    //   });
-
-    //   const usersArray = this.props.initialData.users.filter(user => {
-    //     return users2ProjectArray.find(user2Project => user2Project.projectId*1 === user.projectId*1);
-    //   });
-
-    //   return usersArray;
-    // }
-
-
-    this.props.initialData.users.forEach(user => {
+    usersForProject.forEach(user => {
       newState[user.name] = [];
     });
 
