@@ -2,33 +2,16 @@ import React from 'react';
 import ProjectRow from './ProjectRow/ProjectRow';
 
 export default class ProjectList extends React.Component {
-  stateBuilder = () => {
-    let newState = {};
-
-    const newProjectState = {
+  state = {
+    newProject: {
       name: '',
       description: '',
       userIds: [],
-    };
-
-    // TODO: make this dynamic
-    newState = {
-      newProject: newProjectState,
-      MakenChecked: false,
-      AnnaChecked: false,
-      MichaelChecked: false,
-      DrakeChecked: false,
-    }
-
-    return newState;
-  }
-
-  state = this.stateBuilder();
+    },
+  };
 
   // project checkbox handler
   projectCheckboxHandler = (event) => {
-    console.log(event.target.checked);
-    console.log(!event.target.checked);
 
     // update checked state TODO: make this dynamic
     this.setState({ DrakeChecked: event.target.checked });
@@ -57,13 +40,29 @@ export default class ProjectList extends React.Component {
     }});
   }
 
+  addCheckboxState = (users) => {
+    const newState = this.state;
+
+    users.forEach(user => {
+      newState[`${user}Checked`] = false;
+    });
+
+    this.setState(newState);
+  }
+
+  componentDidMount() {
+    // add Checkboxes to state
+    this.addCheckboxState(this.props.initialData.users);
+  }
+
   render() {
+    // projects object
     const projects = {
       archived: [],
       unarchived: [],
     };
 
-    // build projects object
+    // sort projects object
     this.props.initialData.projects.forEach(project => {
       if (project.isArchived) {
         projects.archived.push(project);
