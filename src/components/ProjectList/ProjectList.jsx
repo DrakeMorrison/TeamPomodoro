@@ -25,6 +25,8 @@ export default class ProjectList extends React.Component {
   createNewProject = (e) => {
     e.preventDefault();
     console.error('new project creation attempted', e);
+    // use axios to send call to api
+    // api returns projectId so we can .then route to the overview component
   }
 
   // project name handler
@@ -41,21 +43,15 @@ export default class ProjectList extends React.Component {
     }});
   }
 
-  // dynamically build state with props
-  addCheckboxState = (users) => {
-    const newState = this.state;
+  // TODO: WIP: getderivedstatefrom props and add checkboxfields to state dynamically
+  static getDerivedStateFromProps(props, state) {
+    const newState = state;
 
-    users.forEach(user => {
-      newState[`${user}Checked`] = false;
+    props.initialData.users.forEach(user => {
+      newState[`${user.name}Checked`] = false;
     });
 
-    this.setState(newState);
-  }
-
-  // TODO: getderivedstatefrom props?
-  componentDidMount() {
-    // add Checkboxes to state
-    this.addCheckboxState(this.props.initialData.users);
+    return newState;
   }
 
   render() {
