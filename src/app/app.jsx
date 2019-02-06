@@ -50,7 +50,7 @@ export default class App extends React.Component {
     });
   }
 
-  // project state handlers
+  // change project state to archive
   archiveProject = (projectId) => {
     const newProjects = this.state.projects;
 
@@ -63,6 +63,7 @@ export default class App extends React.Component {
     this.setState({ projects: newProjects });
   }
 
+  // restore project state
   restoreProject = (projectId) => {
     const newProjects = this.state.projects;
 
@@ -75,6 +76,7 @@ export default class App extends React.Component {
     this.setState({ projects: newProjects });
   }
 
+  // project methods object to pass as prop
   projectMethods = {
     archiveProject: this.archiveProject,
     restoreProject: this.restoreProject

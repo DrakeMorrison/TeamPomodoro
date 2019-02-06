@@ -1,5 +1,6 @@
 import React from 'react';
 import ProjectRow from './ProjectRow/ProjectRow';
+import ProjectModal from './ProjectModal/ProjectModal';
 
 export default class ProjectList extends React.Component {
   state = {
@@ -40,6 +41,7 @@ export default class ProjectList extends React.Component {
     }});
   }
 
+  // dynamically build state with props
   addCheckboxState = (users) => {
     const newState = this.state;
 
@@ -50,12 +52,26 @@ export default class ProjectList extends React.Component {
     this.setState(newState);
   }
 
+  // TODO: getderivedstatefrom props?
   componentDidMount() {
     // add Checkboxes to state
     this.addCheckboxState(this.props.initialData.users);
   }
 
   render() {
+
+    // build userList for modal checkbox
+    const userCheckboxes = this.props.initialData.users.map(user => {
+      return (
+        <div className="checkbox" key={user.id}>
+          <label>
+            <input onChange={this.projectCheckboxHandler} checked={this.state[`${user.name}Checked`]} value={user.id} type="checkbox"></input>
+            {user.name}
+          </label>
+        </div>
+      );
+    });
+
     // projects object
     const projects = {
       archived: [],
@@ -76,60 +92,15 @@ export default class ProjectList extends React.Component {
       return <ProjectRow key={project.id} project={project} isDisabled={false} projectMethods={this.props.projectMethods} />;
     });
 
-    // build archivedprojects
+    // build archived projects
     const archivedProjects = projects.archived.map(project => {
       return <ProjectRow key={project.id} project={project} isDisabled={true} projectMethods={this.props.projectMethods} />;
     })
 
-    // build userList for modal checkbox
-    const userCheckboxes = this.props.initialData.users.map(user => {
-      return (
-        <div className="checkbox" key={user.id}>
-          <label>
-            <input onChange={this.projectCheckboxHandler} checked={this.state[`${user.name}Checked`]} value={user.id} type="checkbox"></input>
-            {user.name}
-          </label>
-        </div>
-      );
-    });
-
-    const modalJSX = (
-      <div className="modal fade" id="addProject" tabIndex="-1" role="dialog" aria-labelledby="myModalLabel">
-        <div className="modal-dialog" role="document">
-          <div className="modal-content">
-            <div className="modal-header">
-              <button type="button" className="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-              <h4 className="modal-title" id="myModalLabel">Add Project</h4>
-            </div>
-            <div className="modal-body">
-
-              <form onSubmit={this.createNewProject}>
-                <div className="form-group">
-                  <label htmlFor="nameOfProject">Name of Project</label>
-                  <input onChange={this.projectNameHandler} value={this.state.newProject.name} type="text" className="form-control" id="nameOfProject" placeholder="Project Name"></input>
-                </div>
-
-                <div className="form-group">
-                  <label htmlFor="descriptionOfProject">Description</label>
-                  <input onChange={this.projectDescriptionHandler} value={this.state.newProject.description} type="text" className="form-control" id="descriptionOfProject" placeholder="Describe project here"></input>
-                </div>
-
-                <p className='help-block'>Add users on this project</p>
-                {userCheckboxes}
-
-                <button type="submit" className="btn btn-success">Add Project!</button>
-              </form>
-
-            </div>
-          </div>
-        </div>
-      </div>
-    );
-
     return (
       <div className='ProjectList col-sm-12'>
 
-        {modalJSX}
+        <ProjectModal userCheckboxes={userCheckboxes} />
 
         <h2>Project List</h2>
         <button className='btn btn-success btn-lg' data-toggle='modal' data-target='#addProject'>New Project</button>
