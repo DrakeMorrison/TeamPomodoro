@@ -43,7 +43,7 @@ export default class ProjectList extends React.Component {
     }});
   }
 
-  // TODO: WIP: getderivedstatefrom props and add checkboxfields to state dynamically
+  // add checkboxfields to state dynamically
   static getDerivedStateFromProps(props, state) {
     const newState = state;
 
