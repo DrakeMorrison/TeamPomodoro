@@ -1,6 +1,5 @@
 import React from 'react';
 import ProjectRow from './ProjectRow/ProjectRow';
-import ProjectModal from './ProjectModal/ProjectModal';
 
 export default class ProjectList extends React.Component {
   state = {
@@ -9,14 +8,16 @@ export default class ProjectList extends React.Component {
       description: '',
       userIds: [],
     },
+    checkboxClick: false,
+    checkboxName: '',
+    buildCheckboxState: true, // used for the first render
+    // includes field for each user: {user.name}Checked: false
   };
 
   // project checkbox handler
   projectCheckboxHandler = (event) => {
 
-    // update checked state TODO: make this dynamic
-    this.setState({ DrakeChecked: event.target.checked });
-
+    this.setState({ checkboxClick: true, checkboxName: event.target.dataset.name, buildCheckboxState: false})
     // TODO: add userId to list
 
   }
@@ -31,25 +32,49 @@ export default class ProjectList extends React.Component {
 
   // project name handler
   projectNameHandler = (event) => {
-    this.setState({ newProject: {
-      name: event.target.value
-    }});
+    this.setState({
+      newProject: {
+        name: event.target.value,
+        description: this.state.newProject.description,
+        userIds: this.state.newProject.userIds,
+      },
+      buildCheckboxState: false,
+    });
   }
 
   // project description handler
   projectDescriptionHandler = (event) => {
-    this.setState({ newProject: {
-      description: event.target.value
-    }});
+    this.setState({
+      newProject: {
+        description: event.target.value,
+        name: this.state.newProject.name,
+        userIds: this.state.newProject.userIds,
+      },
+      buildCheckboxState: false,
+    });
   }
 
   // add checkboxfields to state dynamically
   static getDerivedStateFromProps(props, state) {
+
     const newState = state;
 
-    props.initialData.users.forEach(user => {
-      newState[`${user.name}Checked`] = false;
-    });
+    if (state.checkboxClick) {
+
+      // change the specific value of the one that changed
+      newState[`${state.checkboxName}Checked`] = !state[`${state.checkboxName}Checked`];
+
+      // reset the variable
+      newState.checkboxClick = false;
+
+      } else if (state.buildCheckboxState) {
+
+        // first render; building state with checkboxes
+        props.initialData.users.forEach(user => {
+          newState[`${user.name}Checked`] = false;
+        });
+
+      }
 
     return newState;
   }
@@ -61,7 +86,7 @@ export default class ProjectList extends React.Component {
       return (
         <div className="checkbox" key={user.id}>
           <label>
-            <input onChange={this.projectCheckboxHandler} checked={this.state[`${user.name}Checked`]} value={user.id} type="checkbox"></input>
+            <input onChange={this.projectCheckboxHandler} checked={this.state[`${user.name}Checked`]} value={user.id} data-name={user.name} type="checkbox"></input>
             {user.name}
           </label>
         </div>
@@ -93,10 +118,43 @@ export default class ProjectList extends React.Component {
       return <ProjectRow key={project.id} project={project} isDisabled={true} projectMethods={this.props.projectMethods} />;
     })
 
+    const ModalJSX = (
+      <div className="modal fade" id="addProject" tabIndex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div className="modal-dialog" role="document">
+          <div className="modal-content">
+            <div className="modal-header">
+              <button type="button" className="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 className="modal-title" id="myModalLabel">Add Project</h4>
+            </div>
+            <div className="modal-body">
+
+              <form>
+                <div className="form-group">
+                  <label htmlFor="nameOfProject">Name of Project</label>
+                  <input onChange={this.projectNameHandler} value={this.state.newProject.name} type="text" className="form-control" id="nameOfProject" placeholder="Project Name"></input>
+                </div>
+
+                <div className="form-group">
+                  <label htmlFor="descriptionOfProject">Description</label>
+                  <input onChange={this.projectDescriptionHandler} value={this.state.newProject.description} type="text" className="form-control" id="descriptionOfProject" placeholder="Describe project here"></input>
+                </div>
+
+                <p className='help-block'>Add users on this project</p>
+                {userCheckboxes}
+
+                <button type="submit" className="btn btn-success">Add Project!</button>
+              </form>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+
     return (
       <div className='ProjectList col-sm-12'>
 
-        <ProjectModal userCheckboxes={userCheckboxes} />
+        {ModalJSX}
 
         <h2>Project List</h2>
         <button className='btn btn-success btn-lg' data-toggle='modal' data-target='#addProject'>New Project</button>
