@@ -10,16 +10,19 @@ export default class ProjectList extends React.Component {
     },
     checkboxClick: false,
     checkboxName: '',
+    checkboxValue: '',
     buildCheckboxState: true, // used for the first render
     // includes field for each user: {user.name}Checked: false
   };
 
   // project checkbox handler
   projectCheckboxHandler = (event) => {
-
-    this.setState({ checkboxClick: true, checkboxName: event.target.dataset.name, buildCheckboxState: false})
-    // TODO: add userId to list
-
+    this.setState({
+      checkboxClick: true,
+      checkboxName: event.target.dataset.name,
+      buildCheckboxState: false,
+      checkboxValue: event.target.value,
+    })
   }
 
   // TODO: create new project
@@ -63,6 +66,11 @@ export default class ProjectList extends React.Component {
 
       // change the specific value of the one that changed
       newState[`${state.checkboxName}Checked`] = !state[`${state.checkboxName}Checked`];
+
+      // check if Id is not in userIds
+      if (!state.newProject.userIds.includes(state.checkboxValue*1)) {
+        newState.newProject.userIds.push(state.checkboxValue*1);
+      }
 
       // reset the variable
       newState.checkboxClick = false;
@@ -142,7 +150,7 @@ export default class ProjectList extends React.Component {
                 <p className='help-block'>Add users on this project</p>
                 {userCheckboxes}
 
-                <button type="submit" className="btn btn-success">Add Project!</button>
+                <button type="submit" onClick={this.createNewProject} className="btn btn-success">Add Project!</button>
               </form>
 
             </div>
