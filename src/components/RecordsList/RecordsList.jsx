@@ -4,13 +4,25 @@ import TaskRecord from './TaskRecord/TaskRecord';
 export default class RecordsList extends React.Component {
   render() {
 
-    const listOfRecords = this.props.initialData.records.map(record => {
-      return <TaskRecord key={record.id} record={record} />
+    // add task to record
+
+    const listOfRecords = [];
+
+    this.props.initialData.records.forEach(record => {
+
+      const recordElement = this.props.initialData.tasks.map(task => {
+        if (task.recordId === record.id) {
+          return <TaskRecord key={record.id} record={record} task={task}/>
+        }
+        return null;
+      });
+
+      listOfRecords.push(recordElement);
     });
 
     return (
       <div className='RecordsList'>
-        <h2>RecordsList</h2>
+        <h2>Records List</h2>
         {listOfRecords}
       </div>
     );

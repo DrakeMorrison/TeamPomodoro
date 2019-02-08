@@ -129,6 +129,8 @@ export default class Overview extends Component {
           const newState = {};
           newState[source.droppableId] = items;
 
+          // TODO: find other names of columns and add them into setState
+
           this.setState({ columns: newState });
       } else { // dropped on a different list
           const result = move(
@@ -147,6 +149,7 @@ export default class Overview extends Component {
           newState[sourceListName] = result[sourceListName];
           newState[destinationListName] = result[destinationListName];
 
+          // TODO: find other names of columns and add them into setState
           this.setState({ columns: newState });
       }
   };

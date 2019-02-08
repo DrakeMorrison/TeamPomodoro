@@ -16,8 +16,27 @@ export default class PomodoroTimer extends React.Component {
       <div className='PomodoroTimer'>
         <h2>PomodoroTimer</h2>
         {task}
-        <Timer>
-          <Timer.Seconds />
+        <Timer
+          initialTime={1500000}
+          direction='backward'
+          startImmediately={false}
+        >
+        {({ start, reset, stop }) => (
+          <div>
+            <p>Minutes: <Timer.Minutes /></p>
+
+            <p>Seconds: <Timer.Seconds /></p>
+
+            <br />
+
+            <button onClick={start} className='btn btn-success'>Start Pomodoro</button>
+            <button onClick={() => {
+              stop();
+              reset();
+            }} className='btn btn-danger'>Cancel Pomodoro</button>
+
+          </div>
+        )}
         </Timer>
       </div>
     );
