@@ -5,9 +5,10 @@ import Overview from '../components/Overview/Overview';
 import ProjectList from '../components/ProjectList/ProjectList';
 import PomodoroTimer from '../components/PomodoroTimer/PomodoroTimer';
 import RecordsList from '../components/RecordsList/RecordsList';
-import SplashPage from '../components/SplashPage'
+import SplashPage from '../components/SplashPage/SplashPage'
 import initialData from '../initialData';
 import Nav from './nav';
+// import Axios from 'axios';
 
 // allows me to pass props through the routes
 const renderMergedProps = (component, ...rest) => {
@@ -44,13 +45,17 @@ export default class App extends React.Component {
     console.error('getInitialState was called in the app component');
 
     // TODO: get initialData
-    this.setState({
-      users: initialData.users,
-      projects: initialData.projects,
-      usersToProjects: initialData.usersToProjects,
-      tasks: initialData.tasks,
-      records: initialData.records
-    });
+    // Axios.get('')
+    //   .then(() => {
+        this.setState({
+          users: initialData.users,
+          projects: initialData.projects,
+          usersToProjects: initialData.usersToProjects,
+          tasks: initialData.tasks,
+          records: initialData.records
+        });
+      //     })
+      // .catch(console.error.bind(console));
   }
 
   componentDidMount() {
@@ -67,6 +72,8 @@ export default class App extends React.Component {
     // set to true
     newProjects[projectToArchiveIndex].isArchived = true;
 
+    // TODO: axios update the project
+
     this.setState({ projects: newProjects });
   }
 
@@ -80,6 +87,8 @@ export default class App extends React.Component {
     // set to false
     newProjects[projectToArchiveIndex].isArchived = false;
 
+    // TODO: axios update the project
+
     this.setState({ projects: newProjects });
   }
 
@@ -87,6 +96,14 @@ export default class App extends React.Component {
   projectMethods = {
     archiveProject: this.archiveProject,
     restoreProject: this.restoreProject
+  }
+
+  // create new user
+  newUser = (newUser) => {
+    // update app state
+    const newUsers = this.state.users;
+    newUsers.push(newUser);
+    this.setState({ users: newUsers});
   }
 
   render() {
@@ -97,9 +114,11 @@ export default class App extends React.Component {
             <Nav />
             <div className='container-fluid'>
               <Switch>
-                <Route
+                <CustomRoute
                   exact path='/'
                   component={SplashPage}
+                  users={this.state.users}
+                  newUser={this.newUser}
                 />
                 <CustomRoute
                   path='/projectlist'
@@ -118,6 +137,8 @@ export default class App extends React.Component {
                   path='/timer/:id'
                   component={PomodoroTimer}
                   initialData={this.state}
+                  archiveTask={this.archiveTask}
+                  getInitialState={this.getInitialState}
                 />
                 <CustomRoute
                   path='/records'
