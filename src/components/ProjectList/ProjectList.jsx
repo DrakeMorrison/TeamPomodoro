@@ -1,5 +1,6 @@
 import React from 'react';
 import ProjectRow from './ProjectRow/ProjectRow';
+import Axios from 'axios';
 
 export default class ProjectList extends React.Component {
   state = {
@@ -28,9 +29,19 @@ export default class ProjectList extends React.Component {
   // TODO: create new project
   createNewProject = (e) => {
     e.preventDefault();
+
     console.error('new project creation attempted', e);
+
     // use axios to send call to api
-    // api returns projectId so we can .then route to the overview component
+    // Axios.post(``, this.state.newProject)
+    //   .then(() => {
+        // update state on app component
+        this.props.getInitialState();
+
+        // route to /overview/:id
+        this.props.history.push('/overview/0'); // change 0 to projectId
+      // })
+      // .catch(console.error.bind(console));
   }
 
   // project name handler
@@ -150,7 +161,7 @@ export default class ProjectList extends React.Component {
                 <p className='help-block'>Add users on this project</p>
                 {userCheckboxes}
 
-                <button type="submit" onClick={this.createNewProject} className="btn btn-success">Add Project!</button>
+                <button data-dismiss='modal' type="submit" onClick={this.createNewProject} className="btn btn-success">Add Project!</button>
               </form>
 
             </div>

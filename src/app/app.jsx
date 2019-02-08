@@ -38,9 +38,12 @@ export default class App extends React.Component {
     records: []
   }
 
-  componentDidMount() {
-    // TODO: get initialData
+  getInitialState = () => {
 
+    // getInitialState
+    console.error('getInitialState was called in the app component');
+
+    // TODO: get initialData
     this.setState({
       users: initialData.users,
       projects: initialData.projects,
@@ -48,6 +51,10 @@ export default class App extends React.Component {
       tasks: initialData.tasks,
       records: initialData.records
     });
+  }
+
+  componentDidMount() {
+    this.getInitialState();
   }
 
   // change project state to archive
@@ -99,6 +106,7 @@ export default class App extends React.Component {
                   component={ProjectList}
                   initialData={this.state}
                   projectMethods={this.projectMethods}
+                  getInitialState={this.getInitialState}
                 />
                 <CustomRoute
                   path='/overview/:id'
