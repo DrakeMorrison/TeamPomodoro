@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import { DragDropContext } from 'react-beautiful-dnd';
 import TodayColumn from './TodayColumn/TodayColumn';
+// import Axios from 'axios';
+
+// TODO: filter tasks by user and have them in their correct state aray
 
 // a little function to help us with reordering the result
 const reorder = (list, startIndex, endIndex) => {
@@ -28,17 +31,19 @@ const move = (source, destination, droppableSource, droppableDestination) => {
 
 export default class Overview extends Component {
 
+  projectId = this.props.match.params.id*1;
+
   // building a new state object
   buildStateObject = () => {
 
     // get tasks for project
     const tasksForProject = this.props.initialData.tasks.filter(task => {
-      return task.projectId*1 === this.props.match.params.id*1;
+      return task.projectId*1 === this.projectId;
     });
 
     // get usersToProjects for this project
     const userProjects = this.props.initialData.usersToProjects.filter(u2p => {
-      return u2p.projectId*1 === this.props.match.params.id*1;
+      return u2p.projectId*1 === this.projectId;
     });
 
     // get users for this project; using the userProjects
@@ -57,7 +62,14 @@ export default class Overview extends Component {
     const newState = {
       newTask: {
         name: '',
-      },
+        estimatedPomodori: 0,
+        actualPomodori: 0,
+        internalInterruptions: 0,
+        externalInterruptions: 0,
+        userId: '',
+        isArchived: false,
+        projectId: this.projectId,
+        },
       columns: {},
     };
 
@@ -141,12 +153,30 @@ export default class Overview extends Component {
 
   // new task name state handler
   taskNameHandler = (event) => {
-    this.setState({ newTask: { name: event.target.value } });
+    this.setState({ newTask: {
+      name: event.target.value,
+      estimatedPomodori: 0,
+      actualPomodori: 0,
+      internalInterruptions: 0,
+      externalInterruptions: 0,
+      userId: '',
+      isArchived: false,
+      projectId: this.projectId,
+   } });
   }
 
-  // create new task with axios
+  // TODO: add axios path; create new task with axios
   createNewTask = (e) => {
     e.preventDefault();
+
+    // Axios.post(``, this.state.newTask)
+    //   .then(() => {
+        // api should create new task and new record to match
+
+        // update state on app component
+      //   this.props.getInitialState();
+      // })
+      // .catch(console.error.bind(console));
 
     console.error('new task creation attempted', e);
   }
@@ -173,7 +203,7 @@ export default class Overview extends Component {
                   <input onChange={this.taskNameHandler} value={this.state.newTask.name} type="text" className="form-control" id="nameOfTask" placeholder="Task Name"></input>
                 </div>
 
-                <button onClick={this.createNewTask} data-dismiss='modal' type="submit" className="btn btn-success">Add Project!</button>
+                <button onClick={this.createNewTask} data-dismiss='modal' type="submit" className="btn btn-success">Add Task!</button>
               </form>
 
             </div>

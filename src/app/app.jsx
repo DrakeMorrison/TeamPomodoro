@@ -112,6 +112,7 @@ export default class App extends React.Component {
                   path='/overview/:id'
                   component={Overview}
                   initialData={this.state}
+                  getInitialState={this.getInitialState}
                 />
                 <CustomRoute
                   path='/timer/:id'

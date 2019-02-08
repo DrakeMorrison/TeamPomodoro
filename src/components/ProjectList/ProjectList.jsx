@@ -35,6 +35,7 @@ export default class ProjectList extends React.Component {
     // use axios to send call to api
     // Axios.post(``, this.state.newProject)
     //   .then(() => {
+      // api should create new project and new user2project for each user; return projectId
         // update state on app component
         this.props.getInitialState();
 
