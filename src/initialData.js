@@ -122,22 +122,26 @@ const initialData = {
   records: [
     {
       id: 0,
-      temporalResonance: '2019-02-03',
+      startTime: '2019-02-03',
+      endTime: '',
       projectId: 0,
     },
     {
       id: 1,
-      temporalResonance: '2019-02-03',
+      startTime: '2019-02-03',
+      endTime: '',
       projectId: 1,
     },
     {
       id: 2,
-      temporalResonance: '2019-02-03',
+      startTime: '2019-02-03',
+      endTime: '',
       projectId: 2,
     },
     {
       id: 3,
-      temporalResonance: '2019-02-03',
+      startTime: '2019-02-03',
+      endTime: '',
       projectId: 3,
     },
   ]

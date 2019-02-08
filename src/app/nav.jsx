@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom';
 export default class Nav extends React.Component {
   render() {
     return (
-      <nav className="navbar navbar-default navbar-fixed-top navbar-inverse">
+      <nav className="navbar navbar-default navbar-fixed-top">
         <div className="container-fluid">
 
           <div className="navbar-header">
