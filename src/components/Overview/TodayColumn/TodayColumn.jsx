@@ -3,11 +3,29 @@ import TaskRow from './TaskRow/TaskRow';
 import { Droppable } from 'react-beautiful-dnd';
 
 export default class TodayColumn extends React.Component {
+  state={
+    newTask: {
+      name: '',
+      estimatedPomodori: 0,
+      actualPomodori: 0,
+      internalInterruptions: 0,
+      externalInterruptions: 0,
+      userId: 'active',
+      isArchived: false,
+      projectId: 0,
+      recordId: 0,
+    },
+    newRecord: {
+      temporalResonance: '',
+      projectId: 0,
+    },
+  };
+
   render() {
 
     // listStyle function
     const getListStyle = isDraggingOver => ({
-      background: isDraggingOver ? 'lightblue' : 'lightgrey',
+      background: isDraggingOver ? 'tomato' : 'green',
       padding: '8px',
       width: 250,
     });
@@ -19,7 +37,10 @@ export default class TodayColumn extends React.Component {
               ref={provided.innerRef}
               style={getListStyle(snapshot.isDraggingOver)}
             >
+
               <h3>{this.props.droppableId}</h3>
+
+              <button className='btn btn-success btn-lg' data-toggle='modal' data-target='#addTask'>New Task</button>
 
               {this.props.tasks.map((item, index) => (
 
