@@ -5,7 +5,6 @@ export default class RecordsList extends React.Component {
   render() {
 
     // add task to record
-
     const listOfRecords = [];
 
     this.props.initialData.records.forEach(record => {
