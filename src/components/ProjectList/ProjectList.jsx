@@ -1,6 +1,6 @@
 import React from 'react';
 import ProjectRow from './ProjectRow/ProjectRow';
-import Axios from 'axios';
+// import Axios from 'axios';
 
 export default class ProjectList extends React.Component {
   state = {
@@ -26,7 +26,7 @@ export default class ProjectList extends React.Component {
     })
   }
 
-  // TODO: create new project
+  // TODO: add axios path
   createNewProject = (e) => {
     e.preventDefault();
 
@@ -161,7 +161,7 @@ export default class ProjectList extends React.Component {
                 <p className='help-block'>Add users on this project</p>
                 {userCheckboxes}
 
-                <button data-dismiss='modal' type="submit" onClick={this.createNewProject} className="btn btn-success">Add Project!</button>
+                <button onClick={this.createNewProject} data-dismiss='modal' type="submit" className="btn btn-success">Add Project!</button>
               </form>
 
             </div>

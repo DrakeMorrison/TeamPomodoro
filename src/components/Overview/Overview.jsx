@@ -55,12 +55,21 @@ export default class Overview extends Component {
 
     // new state object
     const newState = {
-      Inventory: tasksForProject
+      newTask: {
+        name: '',
+      },
+      columns: {},
+    };
+
+    const columns = {
+      Inventory: tasksForProject,
     };
 
     usersForProject.forEach(user => {
-      newState[user.name] = [];
+      columns[user.name] = [];
     });
+
+    newState.columns = columns;
 
     return newState;
   }
@@ -76,7 +85,7 @@ export default class Overview extends Component {
   buildId2ListObject = () => {
     const id2List = {};
 
-    Object.keys(this.state).forEach(list => {
+    Object.keys(this.state.columns).forEach(list => {
       id2List[list] = list;
     });
 
@@ -85,7 +94,7 @@ export default class Overview extends Component {
 
   id2List = this.buildId2ListObject();
 
-  getList = id => this.state[this.id2List[id]];
+  getList = id => this.state.columns[this.id2List[id]];
 
   // fires when drag ends on item
   onDragEnd = result => {
@@ -108,7 +117,7 @@ export default class Overview extends Component {
           const newState = {};
           newState[source.droppableId] = items;
 
-          this.setState(newState);
+          this.setState({ columns: newState });
       } else { // dropped on a different list
           const result = move(
               this.getList(source.droppableId),
@@ -126,19 +135,58 @@ export default class Overview extends Component {
           newState[sourceListName] = result[sourceListName];
           newState[destinationListName] = result[destinationListName];
 
-          this.setState(newState);
+          this.setState({ columns: newState });
       }
   };
 
+  // new task name state handler
+  taskNameHandler = (event) => {
+    this.setState({ newTask: { name: event.target.value } });
+  }
+
+  // create new task with axios
+  createNewTask = (e) => {
+    e.preventDefault();
+
+    console.error('new task creation attempted', e);
+  }
+
   render() {
 
-    const listOfColumns = Object.keys(this.state).map(list => {
-      return <TodayColumn key={list} droppableId={list} tasks={this.state[list]} />
+    const listOfColumns = Object.keys(this.state.columns).map(list => {
+      return <TodayColumn key={list} droppableId={list} tasks={this.state.columns[list]} />
     });
+
+    const ModalJSX = (
+      <div className="modal fade" id="addTask" tabIndex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div className="modal-dialog" role="document">
+          <div className="modal-content">
+            <div className="modal-header">
+              <button type="button" className="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 className="modal-title" id="myModalLabel">Add Task</h4>
+            </div>
+            <div className="modal-body">
+
+              <form>
+                <div className="form-group">
+                  <label htmlFor="nameOfTask">Name of Project</label>
+                  <input onChange={this.taskNameHandler} value={this.state.newTask.name} type="text" className="form-control" id="nameOfTask" placeholder="Task Name"></input>
+                </div>
+
+                <button onClick={this.createNewTask} data-dismiss='modal' type="submit" className="btn btn-success">Add Project!</button>
+              </form>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    );
 
     return (
       <div className='Overview'>
         <DragDropContext onDragEnd={this.onDragEnd}>
+
+            {ModalJSX}
 
             {listOfColumns}
 

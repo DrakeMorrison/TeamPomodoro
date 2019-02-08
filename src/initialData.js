@@ -113,7 +113,7 @@ const initialData = {
       actualPomodori: 4,
       internalInterruptions: 2,
       externalInterruptions: 4,
-      userId: 3,
+      userId: 'active',
       isArchived: false,
       projectId: 3,
       recordId: 3,
