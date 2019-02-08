@@ -3,24 +3,6 @@ import TaskRow from './TaskRow/TaskRow';
 import { Droppable } from 'react-beautiful-dnd';
 
 export default class TodayColumn extends React.Component {
-  state={
-    newTask: {
-      name: '',
-      estimatedPomodori: 0,
-      actualPomodori: 0,
-      internalInterruptions: 0,
-      externalInterruptions: 0,
-      userId: 'active',
-      isArchived: false,
-      projectId: 0,
-      recordId: 0,
-    },
-    newRecord: {
-      temporalResonance: '',
-      projectId: 0,
-    },
-  };
-
   render() {
 
     // listStyle function
