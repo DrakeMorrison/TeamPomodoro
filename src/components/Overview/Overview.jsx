@@ -68,6 +68,7 @@ export default class Overview extends Component {
         externalInterruptions: 0,
         userId: '',
         isArchived: false,
+        isAssigned: false,
         projectId: this.projectId,
         },
       columns: {},
