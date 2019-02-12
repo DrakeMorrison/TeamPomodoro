@@ -6,9 +6,9 @@ import ProjectList from '../components/ProjectList/ProjectList';
 import PomodoroTimer from '../components/PomodoroTimer/PomodoroTimer';
 import RecordsList from '../components/RecordsList/RecordsList';
 import SplashPage from '../components/SplashPage/SplashPage'
-import initialData from '../initialData';
 import Nav from './nav';
-// import Axios from 'axios';
+import Axios from 'axios';
+import APIURL from '../apiUrl';
 
 // allows me to pass props through the routes
 const renderMergedProps = (component, ...rest) => {
@@ -45,17 +45,17 @@ export default class App extends React.Component {
     console.error('getInitialState was called in the app component');
 
     // TODO: get initialData
-    // Axios.get('')
-    //   .then(() => {
+    Axios.get(`${APIURL.apiUrl}/app`)
+      .then((res) => {
         this.setState({
-          users: initialData.users,
-          projects: initialData.projects,
-          usersToProjects: initialData.usersToProjects,
-          tasks: initialData.tasks,
-          records: initialData.records
+          users: res.users,
+          projects: res.projects,
+          usersToProjects: res.usersToProjects,
+          tasks: res.tasks,
+          records: res.records
         });
-      //     })
-      // .catch(console.error.bind(console));
+          })
+      .catch(console.error.bind(console));
   }
 
   componentDidMount() {
