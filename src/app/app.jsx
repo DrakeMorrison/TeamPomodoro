@@ -88,8 +88,11 @@ export default class App extends React.Component {
     newProjects[projectToArchiveIndex].isArchived = false;
 
     // TODO: axios update the project
-
-    this.setState({ projects: newProjects });
+    // Axios.put('', newProjects[projectToArchiveIndex])
+    //   .then(() => {
+        this.setState({ projects: newProjects });
+      // })
+      // .catch(console.error.bind(console));
   }
 
   // project methods object to pass as prop

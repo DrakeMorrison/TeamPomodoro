@@ -8,6 +8,7 @@ export default class ProjectList extends React.Component {
       name: '',
       description: '',
       userIds: [],
+      isArchived: false,
     },
     checkboxClick: false,
     checkboxName: '',

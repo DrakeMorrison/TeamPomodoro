@@ -168,7 +168,7 @@ export default class Overview extends Component {
    } });
   }
 
-  // TODO: add axios path; create new task with axios
+  // TODO: add axios path; create new task with axios; use state to update display
   createNewTask = (e) => {
     e.preventDefault();
 
