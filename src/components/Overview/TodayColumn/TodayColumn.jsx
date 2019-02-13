@@ -24,7 +24,7 @@ export default class TodayColumn extends React.Component {
 
               <button className='btn btn-success btn-lg' data-toggle='modal' data-target='#addTask'>New Task</button>
 
-              {this.props.tasks.map((item, index) => (
+              {this.props.tasks.filter(task => task.isArchived === false).map((item, index) => (
 
                 <TaskRow key={item.id} task={item} index={index}/>
 

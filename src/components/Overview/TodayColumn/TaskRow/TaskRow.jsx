@@ -41,6 +41,7 @@ export default class TaskRow extends React.Component {
             {/* TaskRow Content */}
             <Link to={{
               pathname: `/timer/${this.props.task.id}`,
+              state: this.props.task,
             }}>
               <h3>TaskRow: {this.props.task.name}</h3>
             </Link>
