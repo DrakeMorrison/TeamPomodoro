@@ -45,8 +45,6 @@ export default class SplashPage extends React.Component {
 
         <h3>Users:</h3>
 
-        {listOfUsers}
-
         <form className="form-inline" onSubmit={this.createUser}>
           <div className="form-group">
             <label htmlFor="newUser">Name</label>
@@ -55,6 +53,8 @@ export default class SplashPage extends React.Component {
 
           <button type="submit" className="btn btn-danger">Add User</button>
         </form>
+
+        {listOfUsers.reverse()}
 
       </div>
     );
