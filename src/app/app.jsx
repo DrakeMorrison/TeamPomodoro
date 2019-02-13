@@ -44,15 +44,15 @@ export default class App extends React.Component {
     // getInitialState
     console.error('getInitialState was called in the app component');
 
-    // TODO: get initialData
+    // get initialData
     Axios.get(`${APIURL.apiUrl}/app`)
       .then((res) => {
         this.setState({
-          users: res.users,
-          projects: res.projects,
-          usersToProjects: res.usersToProjects,
-          tasks: res.tasks,
-          records: res.records
+          users: res.data.users,
+          projects: res.data.projects,
+          usersToProjects: res.data.usersToProjects,
+          tasks: res.data.tasks,
+          records: res.data.records
         });
           })
       .catch(console.error.bind(console));
@@ -72,9 +72,12 @@ export default class App extends React.Component {
     // set to true
     newProjects[projectToArchiveIndex].isArchived = true;
 
-    // TODO: axios update the project
-
-    this.setState({ projects: newProjects });
+    // send updated project to server
+    Axios.put(`${APIURL.apiUrl}/projects`, newProjects[projectToArchiveIndex])
+      .then(() => {
+        this.setState({ projects: newProjects });
+      })
+      .catch(console.error.bind(console));
   }
 
   // restore project state
@@ -87,12 +90,12 @@ export default class App extends React.Component {
     // set to false
     newProjects[projectToArchiveIndex].isArchived = false;
 
-    // TODO: axios update the project
-    // Axios.put('', newProjects[projectToArchiveIndex])
-    //   .then(() => {
+    // send the updated project to server
+    Axios.put(`${APIURL.apiUrl}/projects`, newProjects[projectToArchiveIndex])
+      .then(() => {
         this.setState({ projects: newProjects });
-      // })
-      // .catch(console.error.bind(console));
+      })
+      .catch(console.error.bind(console));
   }
 
   // project methods object to pass as prop

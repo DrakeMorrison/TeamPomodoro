@@ -1,6 +1,7 @@
 import React from 'react';
 import ProjectRow from './ProjectRow/ProjectRow';
-// import Axios from 'axios';
+import Axios from 'axios';
+import APIURL from '../../apiUrl';
 
 export default class ProjectList extends React.Component {
   state = {
@@ -27,23 +28,22 @@ export default class ProjectList extends React.Component {
     })
   }
 
-  // TODO: add axios path
   createNewProject = (e) => {
     e.preventDefault();
 
     console.error('new project creation attempted', e);
 
     // use axios to send call to api
-    // Axios.post(``, this.state.newProject)
-    //   .then(() => {
-      // api should create new project and new user2project for each user; return projectId
-        // update state on app component
-        this.props.getInitialState();
+    Axios.post(`${APIURL.apiUrl}/projects`, this.state.newProject)
+      .then((res) => {
 
         // route to /overview/:id
-        this.props.history.push('/overview/0'); // change 0 to projectId
-      // })
-      // .catch(console.error.bind(console));
+        this.props.history.push(`/overview/${res.data}`, this.state.newProject);
+
+        // update state on app component
+        this.props.getInitialState();
+      })
+      .catch(console.error.bind(console));
   }
 
   // project name handler

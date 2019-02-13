@@ -1,5 +1,5 @@
 const APIURL = {
-  "apiUrl": "http://localhost:5000/api"
+  "apiUrl": "https://team-pomodoro-api.azurewebsites.net/api"
 }
 
 export default APIURL;

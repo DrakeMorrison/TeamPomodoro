@@ -1,35 +1,36 @@
 import React from 'react';
 import Timer from 'react-compound-timer';
-// import Axios from 'axios';
+import Axios from 'axios';
+import ApiUrl from '../../apiUrl';
 
 export default class PomodoroTimer extends React.Component {
 
   // update task
   updateTask = () => {
-    // const newTask = {
-    //   id: this.props.task.id,
-    //   name: this.props.task.name,
-    //   estimatedPomodori: this.props.task.estimatedPomodori,
-    //   actualPomodori: this.props.task.actualPomodori,
-    //   internalInterruptions: this.props.task.internalInterruptions,
-    //   externalInterruptions: this.props.task.externalInterruptions,
-    //   userId: this.props.task.userId,
-    //   isArchived: true, // set this way for archiving
-    //   projectId: this.props.task.projectId,
-    //   recordId: this.props.task.recordId,
-    // }
+    const newTask = {
+      id: this.props.task.id,
+      name: this.props.task.name,
+      estimatedPomodori: this.props.task.estimatedPomodori,
+      actualPomodori: this.props.task.actualPomodori,
+      internalInterruptions: this.props.task.internalInterruptions,
+      externalInterruptions: this.props.task.externalInterruptions,
+      userId: this.props.task.userId,
+      isArchived: true, // set this way for archiving
+      projectId: this.props.task.projectId,
+      recordId: this.props.task.recordId,
+    }
 
     // TODO: axios call to update task to archived
-    // Axios.put('', newTask)
-    //   .then(() => {
+    Axios.put(`${ApiUrl.apiUrl}/task`, newTask)
+      .then(() => {
 
         // update state in app component
         this.props.getInitialState();
 
         // go back to overview
         this.props.history.goBack();
-      // })
-      // .catch(console.error.bind(console));
+      })
+      .catch(console.error.bind(console));
   }
 
   render() {
