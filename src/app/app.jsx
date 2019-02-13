@@ -6,9 +6,9 @@ import ProjectList from '../components/ProjectList/ProjectList';
 import PomodoroTimer from '../components/PomodoroTimer/PomodoroTimer';
 import RecordsList from '../components/RecordsList/RecordsList';
 import SplashPage from '../components/SplashPage/SplashPage'
-import initialData from '../initialData';
 import Nav from './nav';
-// import Axios from 'axios';
+import Axios from 'axios';
+import APIURL from '../apiUrl';
 
 // allows me to pass props through the routes
 const renderMergedProps = (component, ...rest) => {
@@ -44,18 +44,18 @@ export default class App extends React.Component {
     // getInitialState
     console.error('getInitialState was called in the app component');
 
-    // TODO: get initialData
-    // Axios.get('')
-    //   .then(() => {
+    // get initialData
+    Axios.get(`${APIURL.apiUrl}/app`)
+      .then((res) => {
         this.setState({
-          users: initialData.users,
-          projects: initialData.projects,
-          usersToProjects: initialData.usersToProjects,
-          tasks: initialData.tasks,
-          records: initialData.records
+          users: res.data.users,
+          projects: res.data.projects,
+          usersToProjects: res.data.usersToProjects,
+          tasks: res.data.tasks,
+          records: res.data.records
         });
-      //     })
-      // .catch(console.error.bind(console));
+          })
+      .catch(console.error.bind(console));
   }
 
   componentDidMount() {
@@ -72,9 +72,12 @@ export default class App extends React.Component {
     // set to true
     newProjects[projectToArchiveIndex].isArchived = true;
 
-    // TODO: axios update the project
-
-    this.setState({ projects: newProjects });
+    // send updated project to server
+    Axios.put(`${APIURL.apiUrl}/projects`, newProjects[projectToArchiveIndex])
+      .then(() => {
+        this.setState({ projects: newProjects });
+      })
+      .catch(console.error.bind(console));
   }
 
   // restore project state
@@ -87,9 +90,12 @@ export default class App extends React.Component {
     // set to false
     newProjects[projectToArchiveIndex].isArchived = false;
 
-    // TODO: axios update the project
-
-    this.setState({ projects: newProjects });
+    // send the updated project to server
+    Axios.put(`${APIURL.apiUrl}/projects`, newProjects[projectToArchiveIndex])
+      .then(() => {
+        this.setState({ projects: newProjects });
+      })
+      .catch(console.error.bind(console));
   }
 
   // project methods object to pass as prop

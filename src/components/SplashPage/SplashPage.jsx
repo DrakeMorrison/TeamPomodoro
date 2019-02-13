@@ -1,5 +1,6 @@
 import React from 'react';
-// import Axios from 'axios';
+import Axios from 'axios';
+import APIURL from '../../apiUrl';
 
 export default class SplashPage extends React.Component {
   state={
@@ -8,22 +9,21 @@ export default class SplashPage extends React.Component {
 
   createUser = (event) => {
     event.preventDefault();
-    // Axios.post('', this.state.userName)
-    //   .then((id) => {
-      // api should create new user and return id
+    Axios.post(`${APIURL.apiUrl}/user`, this.state.userName)
+      .then((id) => {
 
         // update app state
         const newUser = {
-          // id: id,
+          id: id,
           name: this.state.userName,
         }
+
         this.props.newUser(newUser);
 
         // update local state
         this.setState({ userName: '', });
-        console.error('user creation attempted', event)
-      // })
-      // .catch(console.error.bind(console));
+      })
+      .catch(console.error.bind(console));
   }
 
   handleUserNameChange = (event) => {

@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { DragDropContext } from 'react-beautiful-dnd';
 import TodayColumn from './TodayColumn/TodayColumn';
-// import Axios from 'axios';
+import Axios from 'axios';
+import ApiUrl from '../../apiUrl';
 
-// TODO: filter tasks by user and have them in their correct state aray
+// TODO: filter tasks by user and have them in their correct state array
 
 // a little function to help us with reordering the result
 const reorder = (list, startIndex, endIndex) => {
@@ -68,7 +69,9 @@ export default class Overview extends Component {
         externalInterruptions: 0,
         userId: '',
         isArchived: false,
+        isAssigned: false,
         projectId: this.projectId,
+        recordId: 0, // api changes this to correct value
         },
       columns: {},
     };
@@ -168,18 +171,17 @@ export default class Overview extends Component {
    } });
   }
 
-  // TODO: add axios path; create new task with axios
   createNewTask = (e) => {
     e.preventDefault();
 
-    // Axios.post(``, this.state.newTask)
-    //   .then(() => {
-        // api should create new task and new record to match
+    Axios.post(`${ApiUrl.apiUrl}/task`, this.state.newTask)
+      .then(() => {
+        // TODO: show new task instead of calling getInitialState;
 
         // update state on app component
-      //   this.props.getInitialState();
-      // })
-      // .catch(console.error.bind(console));
+        this.props.getInitialState();
+      })
+      .catch(console.error.bind(console));
 
     console.error('new task creation attempted', e);
   }
