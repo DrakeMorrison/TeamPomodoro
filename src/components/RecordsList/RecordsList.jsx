@@ -22,7 +22,7 @@ export default class RecordsList extends React.Component {
     return (
       <div className='RecordsList'>
         <h2>Records List</h2>
-        {listOfRecords}
+        {listOfRecords.reverse()}
       </div>
     );
   }

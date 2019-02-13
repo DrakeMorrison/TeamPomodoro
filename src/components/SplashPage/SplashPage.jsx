@@ -4,30 +4,31 @@ import APIURL from '../../apiUrl';
 
 export default class SplashPage extends React.Component {
   state={
-    userName: '',
+    name: '',
   }
 
   createUser = (event) => {
     event.preventDefault();
-    Axios.post(`${APIURL.apiUrl}/user`, this.state.userName)
+
+    Axios.post(`${APIURL.apiUrl}/user`, this.state)
       .then((id) => {
 
         // update app state
         const newUser = {
           id: id,
-          name: this.state.userName,
+          name: this.state.name,
         }
 
         this.props.newUser(newUser);
 
         // update local state
-        this.setState({ userName: '', });
+        this.setState({ name: '', });
       })
       .catch(console.error.bind(console));
   }
 
   handleUserNameChange = (event) => {
-    this.setState({ userName: event.target.value });
+    this.setState({ name: event.target.value });
   }
 
   render() {
@@ -44,16 +45,16 @@ export default class SplashPage extends React.Component {
 
         <h3>Users:</h3>
 
-        {listOfUsers}
-
         <form className="form-inline" onSubmit={this.createUser}>
           <div className="form-group">
             <label htmlFor="newUser">Name</label>
-            <input onChange={this.handleUserNameChange} value={this.state.userName} type="text" className="form-control" id="newUser" placeholder="Kevin Flynn"/>
+            <input onChange={this.handleUserNameChange} value={this.state.name} type="text" className="form-control" id="newUser" placeholder="Kevin Flynn"/>
           </div>
 
           <button type="submit" className="btn btn-danger">Add User</button>
         </form>
+
+        {listOfUsers.reverse()}
 
       </div>
     );
