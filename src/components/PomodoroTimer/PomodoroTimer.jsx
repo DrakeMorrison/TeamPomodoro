@@ -20,7 +20,7 @@ export default class PomodoroTimer extends React.Component {
       recordId: this.props.task.recordId,
     }
 
-    // TODO: axios call to update task to archived
+    // axios call update task to archived
     Axios.put(`${ApiUrl.apiUrl}/task`, newTask)
       .then(() => {
 

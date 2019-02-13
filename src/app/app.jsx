@@ -41,9 +41,6 @@ export default class App extends React.Component {
 
   getInitialState = () => {
 
-    // getInitialState
-    console.error('getInitialState was called in the app component');
-
     // get initialData
     Axios.get(`${APIURL.apiUrl}/app`)
       .then((res) => {

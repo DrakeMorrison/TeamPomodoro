@@ -31,14 +31,9 @@ export default class ProjectList extends React.Component {
   createNewProject = (e) => {
     e.preventDefault();
 
-    console.error('new project creation attempted', e);
-
     // use axios to send call to api
     Axios.post(`${APIURL.apiUrl}/projects`, this.state.newProject)
       .then((res) => {
-
-        // route to /overview/:id
-        this.props.history.push(`/overview/${res.data}`, this.state.newProject);
 
         // update state on app component
         this.props.getInitialState();
@@ -137,7 +132,7 @@ export default class ProjectList extends React.Component {
     // build archived projects
     const archivedProjects = projects.archived.map(project => {
       return <ProjectRow key={project.id} project={project} isDisabled={true} projectMethods={this.props.projectMethods} />;
-    })
+    });
 
     const ModalJSX = (
       <div className="modal fade" id="addProject" tabIndex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -177,13 +172,15 @@ export default class ProjectList extends React.Component {
 
         {ModalJSX}
 
-        <h2>Project List</h2>
+        <h2 className='h1'>Project List</h2>
         <button className='btn btn-success btn-lg' data-toggle='modal' data-target='#addProject'>New Project</button>
 
-        {unarchivedProjects}
+        {unarchivedProjects.reverse()}
 
-        <h2>Archived Projects</h2>
-        {archivedProjects}
+        <h2 className='h1'>Archived Projects</h2>
+
+        {archivedProjects.reverse()}
+
       </div>
     );
   }
