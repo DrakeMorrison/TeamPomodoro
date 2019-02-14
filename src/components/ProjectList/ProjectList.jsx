@@ -156,7 +156,7 @@ export default class ProjectList extends React.Component {
                 </div>
 
                 <p className='help-block'>Add users on this project</p>
-                {userCheckboxes}
+                {userCheckboxes.reverse()}
 
                 <button onClick={this.createNewProject} data-dismiss='modal' type="submit" className="btn btn-success">Add Project!</button>
               </form>

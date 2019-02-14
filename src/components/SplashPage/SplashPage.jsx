@@ -34,18 +34,31 @@ export default class SplashPage extends React.Component {
   render() {
 
     const listOfUsers = this.props.users.map(user => {
-      return <p key={user.id}>{user.name}</p>;
+      return <p className='text-center h4' key={user.id}>{user.name}</p>;
     });
 
     return (
-      <div className='SplashPage col-sm-12'>
+      <div className='SplashPage col-sm-12 text-center'>
         <div className='page-header'>
           <h1>Pomodoro Projects!</h1>
+          <h3>Do more and have fun with time management</h3>
         </div>
+        <blockquote>
+          <p>
+            For many people, time is an enemy. We race against the clock to finish assignments and meet deadlines. The Pomodoro Technique teaches you to work with time, instead of struggling against it. A revolutionary time management system, it is at once deceptively simple to learn and life-changing to use.
+          </p>
+        </blockquote>
 
-        <h3>Users:</h3>
+        <blockquote>
+          <p>
+            The Pomodoro Technique has been featured several times in reviews and magazines. Get an overview of the last news and articles about the Pomodoro Technique.
+          </p>
+          <footer>See more at the official <cite><a className='text-danger' href="https://francescocirillo.com/pages/pomodoro-technique" target="_blank" rel="noopener noreferrer">Pomodoro Technique website</a></cite></footer>
+        </blockquote>
 
-        <form className="form-inline" onSubmit={this.createUser}>
+        <h3 className='text-center'>Users:</h3>
+
+        <form className="form-inline text-center" onSubmit={this.createUser}>
           <div className="form-group">
             <label htmlFor="newUser">Name</label>
             <input onChange={this.handleUserNameChange} value={this.state.name} type="text" className="form-control" id="newUser" placeholder="Kevin Flynn"/>
