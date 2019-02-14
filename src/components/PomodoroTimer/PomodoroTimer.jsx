@@ -35,9 +35,8 @@ export default class PomodoroTimer extends React.Component {
       });
 
     return (
-      <div className='PomodoroTimer'>
-        <h2>PomodoroTimer</h2>
-        {task}
+      <div className='PomodoroTimer text-center'>
+        <h2 className='h1'>{task}</h2>
         <Timer
           initialTime={1500000}
           direction='backward'
@@ -51,15 +50,16 @@ export default class PomodoroTimer extends React.Component {
 
             <br />
 
-            <button onClick={start} className='btn btn-success'>Start Pomodoro</button>
+            <button onClick={start} className='btn btn-lg btn-success'>Start Pomodoro</button>
             <button onClick={() => {
+              // TODO: add alert when timer runs out
               stop();
               reset();
-            }} className='btn btn-danger'>Cancel Pomodoro</button>
+            }} className='btn btn-lg btn-danger'>Cancel Pomodoro</button>
 
             <br />
             <br />
-            <button onClick={() => this.updateTask(this.props.location.state)} className='btn btn-danger'>Completed Task</button>
+            <button onClick={() => this.updateTask(this.props.location.state)} className='btn btn-warning'>Completed Task</button>
 
           </div>
         )}
