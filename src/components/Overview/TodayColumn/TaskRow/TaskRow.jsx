@@ -21,7 +21,7 @@ export default class TaskRow extends React.Component {
       ...draggableStyle
     });
 
-    // hotfix for demo day; TODO: change createNewTask func to allow props to create state? or try somehting else.
+    // hotfix for demo day; TODO: change createNewTask func to allow props to create state? or try something else.
     const counter = () => {
       let count = 1000;
       count++;

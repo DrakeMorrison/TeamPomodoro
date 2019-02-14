@@ -177,7 +177,6 @@ export default class Overview extends Component {
         // update state on app component
         this.props.getInitialState();
 
-        // TODO: show new task instead of calling getInitialState;
         const updatedColumns = this.state.columns;
         updatedColumns.Inventory.push(this.state.newTask);
 
