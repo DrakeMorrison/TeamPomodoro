@@ -7,7 +7,8 @@ export default class TodayColumn extends React.Component {
 
     // listStyle function
     const getListStyle = isDraggingOver => ({
-      background: isDraggingOver ? 'tomato' : 'green',
+      background: isDraggingOver ? '#ebccd1' : 'white',
+      borderColor: '#ebccd1',
       padding: '8px',
       width: 250,
     });
@@ -18,11 +19,12 @@ export default class TodayColumn extends React.Component {
             <div
               ref={provided.innerRef}
               style={getListStyle(snapshot.isDraggingOver)}
+              className='panel'
             >
 
               <h3>{this.props.droppableId}</h3>
 
-              <button className='btn btn-success btn-lg' data-toggle='modal' data-target='#addTask'>New Task</button>
+              {this.props.droppableId === 'Inventory' ? <button className='btn btn-danger' data-toggle='modal' data-target='#addTask'>New Task</button> : null}
 
               {this.props.tasks.filter(task => task.isArchived === false).map((item, index) => (
 

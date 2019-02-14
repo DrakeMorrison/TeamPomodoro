@@ -217,7 +217,7 @@ export default class Overview extends Component {
                   <input onChange={this.taskNameHandler} value={this.state.newTask.name} type="text" className="form-control" id="nameOfTask" placeholder="Task Name"></input>
                 </div>
 
-                <button onClick={this.createNewTask} data-dismiss='modal' type="submit" className="btn btn-success">Add Task!</button>
+                <button onClick={this.createNewTask} data-dismiss='modal' type="submit" className="btn btn-danger">Add Task!</button>
               </form>
 
             </div>
@@ -227,7 +227,7 @@ export default class Overview extends Component {
     );
 
     return (
-      <div className='Overview'>
+      <div className='Overview text-center'>
         <DragDropContext onDragEnd={this.onDragEnd}>
 
             {ModalJSX}
