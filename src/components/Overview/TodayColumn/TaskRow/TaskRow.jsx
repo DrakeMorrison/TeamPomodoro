@@ -13,9 +13,11 @@ export default class TaskRow extends React.Component {
       userSelect: 'none',
       padding: grid * 2,
       margin: `0 0 ${grid}px 0`,
+      borderColor: '',
+      border: 'solid 1px #5cb85c',
 
       // change background colour if dragging
-      background: isDragging ? 'lightgreen' : 'grey',
+      background: isDragging ? '#5cb85c' : 'white',
 
       // styles we need to apply on draggables
       ...draggableStyle
@@ -47,11 +49,11 @@ export default class TaskRow extends React.Component {
             >
 
             {/* TaskRow Content */}
-            <Link to={{
+            <Link className='btn' to={{
               pathname: `/timer/${this.props.task.id}`,
               state: this.props.task,
             }}>
-              <h3>TaskRow: {this.props.task.name}</h3>
+              <h3 className='text-success'>{this.props.task.name}</h3>
             </Link>
 
             </div>

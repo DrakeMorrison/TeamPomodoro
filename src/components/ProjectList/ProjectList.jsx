@@ -156,9 +156,9 @@ export default class ProjectList extends React.Component {
                 </div>
 
                 <p className='help-block'>Add users on this project</p>
-                {userCheckboxes}
+                {userCheckboxes.reverse()}
 
-                <button onClick={this.createNewProject} data-dismiss='modal' type="submit" className="btn btn-success">Add Project!</button>
+                <button onClick={this.createNewProject} data-dismiss='modal' type="submit" className="btn btn-danger">Add Project!</button>
               </form>
 
             </div>
@@ -168,12 +168,14 @@ export default class ProjectList extends React.Component {
     );
 
     return (
-      <div className='ProjectList col-sm-12'>
+      <div className='ProjectList col-sm-12 text-center'>
 
         {ModalJSX}
 
         <h2 className='h1'>Project List</h2>
-        <button className='btn btn-success btn-lg' data-toggle='modal' data-target='#addProject'>New Project</button>
+        <button className='btn btn-danger btn-lg' data-toggle='modal' data-target='#addProject'>New Project</button>
+        <br />
+        <br />
 
         {unarchivedProjects.reverse()}
 
