@@ -21,10 +21,18 @@ export default class TaskRow extends React.Component {
       ...draggableStyle
     });
 
+    // hotfix for demo day; TODO: change createNewTask func to allow props to create state? or try somehting else.
+    const counter = () => {
+      let count = 1000;
+      count++;
+      return count;
+    };
+
     return (
       <Draggable
-        draggableId={this.props.task.id.toString()}
+        draggableId={this.props.task.id ? this.props.task.id.toString() : counter().toString()}
         index={this.props.index}
+        key={this.props.index}
       >
         {(provided, snapshot) => (
 

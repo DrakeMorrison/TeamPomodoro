@@ -51,7 +51,7 @@ export default class App extends React.Component {
           tasks: res.data.tasks,
           records: res.data.records
         });
-          })
+      })
       .catch(console.error.bind(console));
   }
 
