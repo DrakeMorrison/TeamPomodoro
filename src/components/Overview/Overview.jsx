@@ -35,20 +35,20 @@ export default class Overview extends Component {
   projectId = this.props.match.params.id*1;
 
   // building a new state object
-  buildStateObject = () => {
+  buildStateObject = (props) => {
 
     // get tasks for project
-    const tasksForProject = this.props.initialData.tasks.filter(task => {
+    const tasksForProject = props.initialData.tasks.filter(task => {
       return task.projectId*1 === this.projectId;
     });
 
     // get usersToProjects for this project
-    const userProjects = this.props.initialData.usersToProjects.filter(u2p => {
+    const userProjects = props.initialData.usersToProjects.filter(u2p => {
       return u2p.projectId*1 === this.projectId;
     });
 
     // get users for this project; using the userProjects
-    const usersForProject = this.props.initialData.users.filter(user => {
+    const usersForProject = props.initialData.users.filter(user => {
       let check = false;
 
       userProjects.forEach(u2p => {
@@ -67,7 +67,7 @@ export default class Overview extends Component {
         actualPomodori: 0,
         internalInterruptions: 0,
         externalInterruptions: 0,
-        userId: '',
+        userId: 0,
         isArchived: false,
         isAssigned: false,
         projectId: this.projectId,
@@ -90,7 +90,7 @@ export default class Overview extends Component {
   }
 
   // state here because of hoisting
-  state = this.buildStateObject();
+  state = this.buildStateObject(this.props);
 
   /**
    * A semi-generic way to handle multiple lists. Matches
@@ -129,10 +129,8 @@ export default class Overview extends Component {
           );
 
           // set state of the column
-          const newState = {};
+          const newState = this.state.columns;
           newState[source.droppableId] = items;
-
-          // TODO: find other names of columns and add them into setState
 
           this.setState({ columns: newState });
       } else { // dropped on a different list
@@ -148,11 +146,10 @@ export default class Overview extends Component {
           const destinationListName = destination.droppableId;
 
           // new state
-          const newState = {};
+          const newState = this.state.columns;
           newState[sourceListName] = result[sourceListName];
           newState[destinationListName] = result[destinationListName];
 
-          // TODO: find other names of columns and add them into setState
           this.setState({ columns: newState });
       }
   };
@@ -165,7 +162,7 @@ export default class Overview extends Component {
       actualPomodori: 0,
       internalInterruptions: 0,
       externalInterruptions: 0,
-      userId: '',
+      userId: 0,
       isArchived: false,
       projectId: this.projectId,
    } });
@@ -175,15 +172,27 @@ export default class Overview extends Component {
     e.preventDefault();
 
     Axios.post(`${ApiUrl.apiUrl}/task`, this.state.newTask)
-      .then(() => {
-        // TODO: show new task instead of calling getInitialState;
+      .then((res) => {
 
         // update state on app component
         this.props.getInitialState();
+
+        const updatedColumns = this.state.columns;
+        updatedColumns.Inventory.push(this.state.newTask);
+
+        this.setState({ columns: updatedColumns, newTask: {
+          id: res.data,
+          name: '',
+          estimatedPomodori: 0,
+          actualPomodori: 0,
+          internalInterruptions: 0,
+          externalInterruptions: 0,
+          userId: 0,
+          isArchived: false,
+          projectId: this.projectId,
+       }});
       })
       .catch(console.error.bind(console));
-
-    console.error('new task creation attempted', e);
   }
 
   render() {
