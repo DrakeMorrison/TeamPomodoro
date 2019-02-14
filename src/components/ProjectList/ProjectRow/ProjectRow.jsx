@@ -13,30 +13,25 @@ export default class ProjectRow extends React.Component {
     }
 
     let linkClass = '';
-    let rowClass = '';
 
     if (this.props.isDisabled) {
-      linkClass = 'btn btn-danger disabled';
-      rowClass = 'panel panel-danger';
+      linkClass = 'btn text-danger disabled';
     } else {
-      linkClass = 'btn btn-success';
-      rowClass = 'panel panel-success';
+      linkClass = 'btn text-success';
     }
 
     return (
-      <div className={rowClass}>
+      <div className='panel panel-danger'>
         <div className='panel-body'>
-          <Link className={linkClass} to={{
-            pathname: `/overview/${this.props.project.id}`,
-          }}>
-              <h1 className='h1'>{this.props.project.name}</h1>
-            </Link>
-            <h3>{this.props.project.description}</h3>
+
+        <Link className={linkClass} to={{ pathname: `/overview/${this.props.project.id}` }}><h1 className='h1'>{this.props.project.name}</h1></Link>
+          <p>{this.props.project.description}</p>
 
             {this.props.isDisabled ? (
               <button className='btn btn-success' onClick={restoreProject}>Restore</button>
-            ) : (<button className='btn btn-danger' onClick={archiveProject}>Archive</button>)
-            }
+            ) : (
+            <button className='btn btn-danger' onClick={archiveProject}>Archive</button>
+            )}
 
           </div>
       </div>
