@@ -1,68 +1,81 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# NSS Capstone: "Friend Savior"
 
-## Available Scripts
+### Specs:
+> Create a Web Application with full CRUD that utilizes the following:
 
-In the project directory, you can run:
+1. ReactJS
+1. Culmination of technologies mastered in last 12 months
+ * HTML5
+ * CSS
+ * JavaScript
 
-### `npm start`
+### Technologies Used:
+> 1. HTML5, CSS, JavaScript
+> 1. [React 16.4.1](https://reactjs.org/): Core app functionality
+> 1. [React Router 4.3.1](https://reacttraining.com/react-router/): App navigation
+> 1. [React Modal](http://reactcommunity.org/react-modal/) : End-of-game modals
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
 
-### `npm test`
+### Description:
+##### "Timed First-Aid Quiz"
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+> Intended primarily for Non-Tactical Emergency Personnel during high-variability and high-risk engagements. Not intended for Civilians.
 
-### `npm run build`
+> Users log in each time they wish to save a friend. They can view the results of previous games and see their friend list.
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
+> When they start a new game, they are presented with a question and several answers they have to pick between while they are timed.
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
+> Should they answer correctly, the game asks them the next question. However, if they guess wrongly, they lose 10 seconds of time and still have to answer the next question!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+> As they succeed and keep their friends alive, they accumulate points and awards for their rescues.
 
-### `npm run eject`
+##### Launch Page
+<img src="https://github.com/DrakeMorrison/TECC-Quiz/raw/master/screenshots/launchpage.png">
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+##### Main Menu
+<img src="https://github.com/DrakeMorrison/TECC-Quiz/raw/master/screenshots/menu.png">
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+##### Friends Page
+<img src="https://github.com/DrakeMorrison/TECC-Quiz/raw/master/screenshots/friendsPage.png">
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+##### Game Review Page
+<img src="https://github.com/DrakeMorrison/TECC-Quiz/raw/master/screenshots/gameReview.png">
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+##### The Questions
+<img src="https://github.com/DrakeMorrison/TECC-Quiz/raw/master/screenshots/questionPage.png">
 
-## Learn More
+##### Rescue Succeeded!
+<img src="https://github.com/DrakeMorrison/TECC-Quiz/raw/master/screenshots/success.png">
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+##### Rescue Failed!
+<img src="https://github.com/DrakeMorrison/TECC-Quiz/raw/master/screenshots/Failure.png">
 
-To learn React, check out the [React documentation](https://reactjs.org/).
 
-### Code Splitting
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+### How to run:
+```
+1. Clone this repo and navigate into the project folder in your terminal
+2. Type 'npm install' to download required dependencies.
+3. Type 'npm start' to start a local server with the application.
+```
+### Demo:
+[Preview the project here.](https://friend-savior.firebaseapp.com/)
 
-### Analyzing the Bundle Size
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
 
-### Making a Progressive Web App
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
+### Specs By:
+[Nashville Software School](https://github.com/nashville-software-school)
 
-### Advanced Configuration
+[Zoe Ames](https://github.com/zoeames)
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
 
-### Deployment
+### Contributors:
+[Drake Morrison](https://github.com/drakemorrison)
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
 
-### `npm run build` fails to minify
+### Inspiration for this project and more info:
+[Tactical Emergency Casualty Care](https://www.naemt.org/education/tecc)
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+#### This information is for entertainment uses only. I am not responsible for any injuries or death that may occur when following the information within this application. If you wish to know more, I suggest you see if your local Law Enforcement and Firefighters holds classes on these subjects. I simply want to help people think through what they would do in an extreme situation beforehand so that they are better prepared and maybe increase their chances of surviving.
