@@ -1,4 +1,5 @@
-# NSS Capstone: "Friend Savior"
+# NSS Capstone: "Team Pomodoro"
+###### See the API Here [Team Pomodoro API](https://github.com/DrakeMorrison/team-pomodoro-api)
 
 ### Specs:
 > Create a Web Application with full CRUD that utilizes the following:
@@ -6,51 +7,31 @@
 1. ReactJS
 1. Culmination of technologies mastered in last 12 months
  * HTML5
- * CSS
+ * CSS3
  * JavaScript
 
 ### Technologies Used:
 > 1. HTML5, CSS, JavaScript
 > 1. [React 16.4.1](https://reactjs.org/): Core app functionality
 > 1. [React Router 4.3.1](https://reacttraining.com/react-router/): App navigation
-> 1. [React Modal](http://reactcommunity.org/react-modal/) : End-of-game modals
+> 1. [Axios](https://github.com/axios/axios): HTTP Requests
+> 1. [React-Beautiful-DnD](https://github.com/atlassian/react-beautiful-dnd): Drag-and-Drop Feature
+> 1. [React-compound-timer](https://www.npmjs.com/package/react-compound-timer): Timer Component
+> 1. [Bootstrap 3](https://getbootstrap.com/docs/3.3/getting-started/): Styling
 
 
 
 ### Description:
-##### "Timed First-Aid Quiz"
+##### "Project-based time management with the Pomodoro Technique"
 
-> Intended primarily for Non-Tactical Emergency Personnel during high-variability and high-risk engagements. Not intended for Civilians.
+> Users create Projects and add team members to the project
 
-> Users log in each time they wish to save a friend. They can view the results of previous games and see their friend list.
+> Users create Tasks on a project and assign them
 
-> When they start a new game, they are presented with a question and several answers they have to pick between while they are timed.
+> Each Task has a Pomodoro Timer built in.
 
-> Should they answer correctly, the game asks them the next question. However, if they guess wrongly, they lose 10 seconds of time and still have to answer the next question!
-
-> As they succeed and keep their friends alive, they accumulate points and awards for their rescues.
-
-##### Launch Page
-<img src="https://github.com/DrakeMorrison/TECC-Quiz/raw/master/screenshots/launchpage.png">
-
-##### Main Menu
-<img src="https://github.com/DrakeMorrison/TECC-Quiz/raw/master/screenshots/menu.png">
-
-##### Friends Page
-<img src="https://github.com/DrakeMorrison/TECC-Quiz/raw/master/screenshots/friendsPage.png">
-
-##### Game Review Page
-<img src="https://github.com/DrakeMorrison/TECC-Quiz/raw/master/screenshots/gameReview.png">
-
-##### The Questions
-<img src="https://github.com/DrakeMorrison/TECC-Quiz/raw/master/screenshots/questionPage.png">
-
-##### Rescue Succeeded!
-<img src="https://github.com/DrakeMorrison/TECC-Quiz/raw/master/screenshots/success.png">
-
-##### Rescue Failed!
-<img src="https://github.com/DrakeMorrison/TECC-Quiz/raw/master/screenshots/Failure.png">
-
+##### Project Page
+<img src="https://github.com/DrakeMorrison/TeamPomodoro/raw/master/screenshots/Overview.png">
 
 
 ### How to run:
@@ -59,23 +40,16 @@
 2. Type 'npm install' to download required dependencies.
 3. Type 'npm start' to start a local server with the application.
 ```
+
 ### Demo:
-[Preview the project here.](https://friend-savior.firebaseapp.com/)
-
-
+[Preview the project here.](https://pomodoro-projects.firebaseapp.com/)
 
 
 ### Specs By:
 [Nashville Software School](https://github.com/nashville-software-school)
 
-[Zoe Ames](https://github.com/zoeames)
+[Nathan Gonzalez](https://github.com/copypastedeveloper)
 
 
 ### Contributors:
 [Drake Morrison](https://github.com/drakemorrison)
-
-
-### Inspiration for this project and more info:
-[Tactical Emergency Casualty Care](https://www.naemt.org/education/tecc)
-
-#### This information is for entertainment uses only. I am not responsible for any injuries or death that may occur when following the information within this application. If you wish to know more, I suggest you see if your local Law Enforcement and Firefighters holds classes on these subjects. I simply want to help people think through what they would do in an extreme situation beforehand so that they are better prepared and maybe increase their chances of surviving.
