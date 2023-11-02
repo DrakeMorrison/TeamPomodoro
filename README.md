@@ -41,9 +41,6 @@
 3. Type 'npm start' to start a local server with the application.
 ```
 
-### Demo:
-[Preview the project here.](https://pomodoro-projects.firebaseapp.com/)
-
 
 ### Specs By:
 [Nashville Software School](https://github.com/nashville-software-school)
